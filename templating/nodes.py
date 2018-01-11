@@ -38,7 +38,8 @@ class PythonNode(Node):
         self.expression = expression
 
     def evaluate(self, context):
-        return html.escape(eval(self.expression))
+        return html.escape(eval(self.expression, {}, context))
+
 
 class IfNode(Node):
     def __init__(self, condition, child):
@@ -66,4 +67,28 @@ class ForNode(Node):
         self.child = child
 
     def evaluate(self, context):
-        iterable = list(self.iterable)
+        iterable = eval(self.iterable, {}, context)
+        variableName = self.variableName
+        newString = ""
+        for item in iterable:
+            context[variableName] = item
+            newString += self.child.evaluate(context)
+
+        return newString
+
+
+            # {% for variableName in iterable %}
+## TEST CODE
+# ga = GroupNode()
+#
+# group = GroupNode()
+# group.addChild(PythonNode("item"))
+# group.addChild(PythonNode("item"))
+# group.addChild(PythonNode("item"))
+# forNode = ForNode("item", '["a", "b", "c"]', group)
+#
+# ga.addChild(forNode)
+#
+# ifNode = IfNode("1 == 0", TextNode("Hello!!!"))
+# ga.addChild(ifNode)
+# print(ga.evaluate({}))
