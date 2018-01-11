@@ -1,0 +1,7 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.one {
+  grid-column: 1/3
+}
