@@ -53,6 +53,8 @@ class IfNode(Node):
             return ""
 
 
+
+
 # class VariableNode(Node):
 #     def __init__(self, expression):
 #         self.expression = expression
@@ -92,3 +94,66 @@ class ForNode(Node):
 # ifNode = IfNode("1 == 0", TextNode("Hello!!!"))
 # ga.addChild(ifNode)
 # print(ga.evaluate({}))
+
+
+
+test = """
+<h1> This is a {{test}} </h1>
+"""
+mode = "string"
+
+string = ""
+nodeString = ""
+
+nodeStack = GroupNode()
+
+def processPython(nodeString):
+    nodeStack.addChild(PythonNode(nodeString))
+
+def processNode(nodeString):
+    nodeStack.addChild(PythonNode(nodeString))
+
+def endString():
+    global string
+    nodeStack.addChild(TextNode(string))
+    string = ""
+
+while test != "":
+    print(test)
+    print(mode)
+    if mode == "string":
+        if test[:2] == "{{":
+            mode = "python"
+            endString()
+            test = test[2:]
+        elif test[:2] == "{%":
+            mode = "python"
+            endString()
+            test = test[2:]
+        else:
+            string += test[0]
+            test = test[1:]
+    elif node == "python":
+        if test[:2] == "}}":
+            mode = "string"
+            test = test[2:]
+            string = ""
+            # Process Nodestring
+            processPython(nodeString)
+        else:
+            nodeString += test[0]
+            test = test[1:]
+
+    elif node == "node":
+        if test[:2] == "%}":
+            mode = "string"
+            test = test[2:]
+            string = ""
+            # Process Nodestring
+            processNode(nodeString)
+        else:
+            nodeString += test[0]
+            test = test[1:]
+
+endString()
+print(nodeStack.evaluate({"test": "Hello"}))
