@@ -45,6 +45,7 @@ def ESP_handler(request):
 def new_esp_handler(request):
     variable = request.get_field("username")
     print(variable)
+    request.redirect('/')
 
 server = Server() # Create a server object
 server.register(r'/', index_handler)
