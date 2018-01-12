@@ -89,7 +89,7 @@ li{
 .logins{
   text-align: right;
 }
-
+/*profile page styling*/
 .right-two{
   grid-column: 2 / span 2;
   padding: 30px;
@@ -102,4 +102,31 @@ li{
 }
 article{
   grid-column: 1 / span 3;
+}
+/*index page styling*/
+#indeximage{
+  grid-column: 1 / span 2;
+  padding-top: 30px;
+
+  object-fit: cover;
+}
+.right-one{
+  grid-column: 3 / span 1;
+  padding: 20px;
+}
+.box{
+  border: 3px solid black;
+  text-align: center;
+  margin: 2px;
+}
+.option{
+  height: 300px;
+  width: 100%;
+  font-size: 60px;
+}
+.bottombox{
+  grid-column: 1 / span 3;
+  border: 3px solid black;
+  text-align: center;
+  margin: 2px;
 }
