@@ -1,7 +1,7 @@
 # The Server
 from templating import render
 from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
-
+from database.seeker import Seeker
 
 def index_handler (request):
     with open('index.html') as i:
@@ -10,9 +10,10 @@ def index_handler (request):
 
 def profile_handler (request, user_id):
     if user_id == '1':
+        test_user = Seeker(1,"James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", "Univeristy of Sydney - Bachelor of Science,PhD in Computing Linguistics @ Sydeny Univeristy", "Coding,Running buisinesses,Reading storiess,spelling", "Python,everythgin","NCSS")
         with open('profile.html') as p:
             profile_html = p.read()
-            profile_html = render(profile_html, {"test": "Hello, World!"})
+            profile_html = render(profile_html, {"user": test_user,})
             request.write(profile_html)
     else:
         request.write("User Not found")
