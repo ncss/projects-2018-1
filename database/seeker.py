@@ -1,26 +1,27 @@
 import sqlite3
+# move this to createdatabase file.
+conn = sqlite3.connect('seekers_personal.db')
+cur = conn.cursor()
 
-CREATE TABLE seekers_personal (
-    id INTEGER NOT NULL,
-    fname TEXT NOT NULL,
-    lname TEXT NOT NULL,
-    gender TEXT NOT NULL,
-    age INTEGER NOT NULL,
-    phone INTEGER NOT NULL,
-    email TEXT NOT NULL,
-    city TEXT NOT NULL,
-    education TEXT NOT NULL,
-    PRIMARY KEY (id)
-);
+cur.execute("")
+
+cur.close()
+conn.close()
 
 class Seeker(object):
     """Person searching for work experience."""
-    def __init__(self, fname, lname, gender, age, phone, email, city, education):
-        self.fname = "James"
-        self.lname = "Curran"
-        self.gender = 'Non-binary'
-        self.age = 25
-        self.phone = "000"
-        self.email = "james@ncss.com"
-        self.city = "Sydney"
-        self.education = "University of Sydney"
+    def __init__(self, id, fname, lname, birthdate, phone, email, city, education, hobbies, skills, experiences):
+        self.id = id
+        self.fname = fname
+        self.lname = lname
+        self.birth_date = birthdate
+        self.phone = phone
+        self.email = email
+        self.city = city
+        self.education = education
+        self.hobbies = hobbies
+        self.skills = skills
+        self.experiences = experiences
+#create DB call in sepereate files (createdatabse file)
+# class function to create user (INSERT INTO etc.)
+# class function to get user from db
