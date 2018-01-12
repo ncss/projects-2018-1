@@ -2,6 +2,7 @@
 
 from tornado.ncss import Server, ncssbook_log
 
+
 def index_handler (request):
     with open('index.html') as i:
         index_html = i.read()
