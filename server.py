@@ -10,7 +10,7 @@ def index_handler (request):
 
 def profile_handler (request, user_id):
     if user_id == '1':
-        test_user = Seeker(1,"James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", "Univeristy of Sydney - Bachelor of Science,PhD in Computing Linguistics @ Sydeny Univeristy", "Coding,Running buisinesses,Reading storiess,spelling", "Python,everythgin","NCSS")
+        test_user = Seeker(1,"James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", "Univeristy of Sydney - Bachelor of Science,PhD in Computing Linguistics @ Sydeny Univeristy", "Coding, Running buisinesses, Reading stories, spelling", "Python, everything","NCSS")
         with open('profile.html') as p:
             profile_html = p.read()
             profile_html = render(profile_html, {"user": test_user,})
