@@ -10,7 +10,6 @@ class TextNode(Node):
     thisText = TextNode("Value of the thisText")
 
     thisText.evaluate()
-
     """
     def __init__(self, value):
         self.value = value
@@ -34,11 +33,11 @@ class GroupNode(Node):
         return theString
 
 class PythonNode(Node):
-    def __init__(self, expression):
-        self.expression = expression
+    def __init__(self, value):
+        self.value = value
 
     def evaluate(self, context):
-        return html.escape(eval(self.expression, {}, context))
+        return html.escape(eval(self.value, {}, context))
 
 
 class IfNode(Node):

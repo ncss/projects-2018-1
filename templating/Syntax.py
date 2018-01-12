@@ -1,17 +1,16 @@
 import re
 import sys
-import nodes
-import regex
+from nodes import *
+from regex import *
 
-
-def _parse_template(template):
+def isValidTemplate(template):
   toconcat = []
   matches = []
   x = False
   for line in template:
      toconcat.append(line.strip())
-  Tree = "".join(toconcat)
-  for char in Tree:
+  tree = "".join(toconcat)
+  for char in tree:
     if x == True and char != "}":
       s += char
     if char == "}":
@@ -23,15 +22,15 @@ def _parse_template(template):
   # finished scanning all characters
   # if x is still true, then an ending curly brace hasn't ended
   if x == True:
-    raise ParseError
+    raise TypeError
 
   for item in matches:
     for regex in regexes:
       if bool(re.match(regexes[regex],item)) == False:
-        raise ParseError
-  return
+        raise TypeError
+  return True
 
-def group_parse(template,context,endNode = None):
+def generateTree(template, endNode = None):
     tree = GroupNode()
     nodeType = "string"
     index = 0
@@ -46,35 +45,55 @@ def group_parse(template,context,endNode = None):
         if nodeType == "string":
             nodeContent = ""
             # if current node is a text node
-            while template[0] != "{":
+            while len(template) and template[0] != "{" :
                 nodeContent += template[0]
-                template = template[1:]
+                if len(template) > 1:
+                    template = template[1:]
+                else:
+                    template = ""
             tree.addChild(TextNode(nodeContent))
         else:
             nodeContent = ""
             numBraces = 0
-            while template[0] != "}":
+            while len(template) and template[0] != "}":
                 if template[0] == "{":
                     numBraces += 1
                 nodeContent += template[0]
-                template = template[1]
+                if len(template) > 1:
+                    template = template[1:]
+                else:
+                    template = ""
             nodeContent += template[:numBraces]
             template = template[numBraces:]
+            for regex in regexes:
+                match = re.search(regexes[regex], nodeContent)
+                if match:
+                    break
+            if regex == 'include':
+                filename = match.group(2)
+                with open(filename) as f:
+                    f = f.read()
+                    tree.addChild(generateTree(f))
+            elif regex == 'expr':
+                tree.addChild(PythonNode(match.group(1)))
+            else:
+                raise TypeError
     return tree
 
 
 
 
-
-def render_profiles(context):
+def render_profiles(context, file):
   try:
-    with open('html.txt') as f:
-      tree = _parse_template(f.read())
-  except ParseError as e:
+    with open(file) as f:
+      f = f.read()
+      tree = generateTree(f)
+      print(tree.evaluate(context))
+  except TypeError as e:
     #ncssbook_log.exception(e)
     return False
   else:
     #tree.render(sys.stdout,context)
     return True
 
-render_profiles()
+render_profiles({'desu': 'world!!'}, 'html.txt')
