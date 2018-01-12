@@ -16,7 +16,7 @@ def profile_handler (request, user_id):
     if user_id == '1':
         with open('profile.html') as p:
             profile_html = p.read()
-            profile_html = render(profile_html, {"test": user})
+            profile_html = render(profile_html, {"user": user})
             request.write(profile_html)
     else:
         with open("usernotfound.html") as u:
