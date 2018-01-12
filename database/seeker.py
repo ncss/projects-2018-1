@@ -3,10 +3,6 @@ import sqlite3
 conn = sqlite3.connect('seekers_personal.db')
 cur = conn.cursor()
 
-cur.execute("")
-
-cur.close()
-conn.close()
 
 class Seeker(object):
     """Person searching for work experience."""
@@ -22,6 +18,19 @@ class Seeker(object):
         self.hobbies = hobbies
         self.skills = skills
         self.experiences = experiences
+
+    def new_user(self):
+        conn = sqlite3.connect('seekers_personal.db')
+        cur = conn.cursor()
+        print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+                    VALUES ('{}','{}'.'{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+        cur.execute("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+                    VALUES ('{}','{}'.'{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+        print(self.id)
+        cur.close()
+        conn.close()
+cur.close()
+conn.close()
 #create DB call in sepereate files (createdatabse file)
 # class function to create user (INSERT INTO etc.)
 # class function to get user from db
