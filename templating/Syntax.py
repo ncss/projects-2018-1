@@ -1,7 +1,7 @@
 import re
 import sys
-from nodes import *
-from regex import *
+from templating.nodes import *
+from templating.regex import *
 
 def isValidTemplate(template):
   toconcat = []
@@ -95,5 +95,3 @@ def render_profiles(context, file):
   else:
     #tree.render(sys.stdout,context)
     return True
-
-render_profiles({'desu': 'world!!'}, 'html.txt')
