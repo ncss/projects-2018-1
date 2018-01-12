@@ -36,13 +36,13 @@ def map_handler(request):
     request.write("Page Under Construction")
 
 # Handler to display the form
-def ESP_handler(request):
-    with open('ExampleSeekerProfile.html') as i:
+def profile_creator_handler(request):
+    with open('profile_creator.html') as i:
         ESP_html = i.read()
         request.write(ESP_html) # TEMPORARY STAND IN HTML AND CSS FILE
 
 # Handler for creating a new profile (for submiting the form, handle the returned post)
-def new_esp_handler(request):
+def finished_profile_handler(request):
     variable = request.get_field("username")
     print(variable)
     request.redirect('/')
@@ -54,5 +54,5 @@ server.register(r'/searchresult/', searchresult_handler)
 server.register(r'/positioninformation/(\d+)', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/map/', map_handler)
-server.register(r'/ExampleSeekerProfile/', ESP_handler, post = new_esp_handler)
+server.register(r'/profilecreation/', profile_creator_handler, post = finished_profile_handler)
 server.run() # Runs Server
