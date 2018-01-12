@@ -1,8 +1,9 @@
 import re
 import sys
+import nodes
+import regex
 
-regexes = {}
-           
+
 def _parse_template(template):
   toconcat = []
   matches = []
@@ -23,14 +24,48 @@ def _parse_template(template):
   # if x is still true, then an ending curly brace hasn't ended
   if x == True:
     raise ParseError
-    
+
   for item in matches:
     for regex in regexes:
       if bool(re.match(regexes[regex],item)) == False:
         raise ParseError
-  return 
-      
-  
+  return
+
+def group_parse(template,context,endNode = None):
+    tree = GroupNode()
+    nodeType = "string"
+    index = 0
+    currentNode = None
+    while template != "":
+        # determine nodeType of currentNode
+        if template[0] == "{":
+            nodeType = "template"
+        else:
+            nodeType = "string"
+        # extract current  node
+        if nodeType == "string":
+            nodeContent = ""
+            # if current node is a text node
+            while template[0] != "{":
+                nodeContent += template[0]
+                template = template[1:]
+            tree.addChild(TextNode(nodeContent))
+        else:
+            nodeContent = ""
+            numBraces = 0
+            while template[0] != "}":
+                if template[0] == "{":
+                    numBraces += 1
+                nodeContent += template[0]
+                template = template[1]
+            nodeContent += template[:numBraces]
+            template = template[numBraces:]
+    return tree
+
+
+
+
+
 def render_profiles(context):
   try:
     with open('html.txt') as f:
@@ -41,6 +76,5 @@ def render_profiles(context):
   else:
     #tree.render(sys.stdout,context)
     return True
-      
-render_profiles()       
-  
+
+render_profiles()
