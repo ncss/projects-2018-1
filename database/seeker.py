@@ -5,7 +5,7 @@ conn = sqlite3.connect('seekers_personal.db')
 cur = conn.cursor()
 
 cur.execute(CREATE TABLE seekers_personal (
-    id INTEGER NOT NULL,
+    id INTEGER AUTOINCREMENT NOT NULL,
     fname TEXT NOT NULL,
     lname TEXT NOT NULL,
     birth_date TEXT NOT NULL,
@@ -22,7 +22,6 @@ conn.commit()
 cur.close()
 conn.close()
 """
-id = 1
 
 
 class Seeker(object):
@@ -45,12 +44,12 @@ class Seeker(object):
         #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
         #            VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
         cur.execute("""INSERT INTO seekers_personal (fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-                    VALUES ({},'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(id,self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+                    VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
 
         conn.commit()
         cur.close()
         conn.close()
-        id += 1
+
 
 #Find the seeker with specific id and return information
 def get_seeker(id):
