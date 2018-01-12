@@ -3,7 +3,9 @@
 from tornado.ncss import Server, ncssbook_log
 
 def index_handler (request):
-    request.write("Placeholder")
+    with open('index.html') as i:
+        index_html = i.read()
+        request.write(index_html) # TEMPORARY STAND IN HTML AND CSS FILE
 
 def profile_handler (request, user_id):
     if user_id == '1':
@@ -13,7 +15,23 @@ def profile_handler (request, user_id):
     else:
         request.write("User Not found")
 
+def about_handler(request):
+    request.write("Page Under Construction")
+
+def searchresult_handler(request):
+    request.write("Page Under Construction")
+
+def position_handler(request, page_id):
+    request.write("Page Under Construction")
+
+def map_handler(request):
+    request.write("Page Under Construction")
+
 server = Server()
 server.register(r'/', index_handler)
+server.register(r'/about/', about_handler)
+server.register(r'/searchresult/', searchresult_handler)
+server.register(r'/positioninformation/(\d+)', position_handler)
 server.register(r'/profile/(\d+)/', profile_handler)
+server.register(r'/map/', map_handler)
 server.run()
