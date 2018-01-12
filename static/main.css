@@ -1,10 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:300,400');
+
 html{
   align-self: center;
 }
-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+
+body{
+
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+
 }
+
+header {
+  background-color: RGB(51,51,51);
+  color: RGB(153,153,153);
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 10px 0;
+  border-bottom: 5px solid RGB(198,156,109);
+}
+
+
+h1{
+  color: RGB(198,156,109);
+  font-weight: 300;
+  font-size: 50px;
+  font-family: 'Source Sans Pro';
+  margin: 20px 0;
+}
+
+h2{
+  color: RGB(140,98,56);
+  font-weight: 300;
+  font-size: 30px;
+  font-family: 'Source Sans Pro';
+  margin: 20px 0;
+}
+
+
+main {
+    background-color: RGB(230,230,230);
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+footer {
+  background-color: RGB(51,51,51);
+  padding: 10px;
+  color: RGB(153,153,153);
+  text-align:center;
+}
+
+
+header>nav>ul{
+  list-style: none;
+  color: RGB(198,156,109)
+}
+
+header>nav>ul>li{
+  display: inline-block;
+}
+
+.logo{
+  color: RGB(153,153,153);
+  font-size: 24px;
+}
+
+
+nav{
+  width: 60%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+
+}
+.full-width{
+  grid-column: 1 / span 3;
+}
+
+li{
+  margin: 10px;
+
+}
+
+
+.logins{
+  text-align: right;
+}
+
 .right-two{
   grid-column: 2 / span 2;
   padding: 30px;
