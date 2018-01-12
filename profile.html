@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="/static/main.css" rel="stylesheet">
+		<link href="static/main.css" rel="stylesheet">
      <title>Profiles</title>
  </head>
  <body>
 	 <img id="profile-picture" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
 	<div class="right-two">
-	 <h2>{{user.fname + ' ' + user.lname}}</h2>
+	 <h2>{{user.fname + ' ' + user.fname}}</h2>
 	 <h4>{{user.city}}, Australia</h4>
-	 <h4>Professional Interests: <p style="font-size: 85%;">{{user.hobbies}}</p></h4>
+	 <h4>Professional Interests: <p style="font-size: 85%;">{{', '.join(user.hobbies)}}</p></h4>
 	 <h4>Email: <p style="font-size: 85%;">hackervoice.imin@ncss.com.au</p> </h4>
 </div>
 <article>
