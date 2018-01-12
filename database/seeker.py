@@ -1,13 +1,33 @@
 import sqlite3
 # move this to createdatabase file.
+"""
 conn = sqlite3.connect('seekers_personal.db')
 cur = conn.cursor()
+
+cur.execute(CREATE TABLE seekers_personal (
+    id INTEGER NOT NULL,
+    fname TEXT NOT NULL,
+    lname TEXT NOT NULL,
+    birth_date TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT NOT NULL,
+    city TEXT NOT NULL,
+    education TEXT NOT NULL,
+    hobbies TEXT NOT NULL,
+    skills TEXT NOT NULL,
+    experiences TEXT NOT NULL,
+    PRIMARY KEY (id));)
+
+conn.commit()
+cur.close()
+conn.close()
+"""
+id = 1
 
 
 class Seeker(object):
     """Person searching for work experience."""
-    def __init__(self, id, fname, lname, birthdate, phone, email, city, education, hobbies, skills, experiences):
-        self.id = id
+    def __init__(self, fname, lname, birthdate, phone, email, city, education, hobbies, skills, experiences):
         self.fname = fname
         self.lname = lname
         self.birth_date = birthdate
@@ -19,18 +39,39 @@ class Seeker(object):
         self.skills = skills
         self.experiences = experiences
 
-    def new_user(self):
+    def upload_seeker(self,id):
         conn = sqlite3.connect('seekers_personal.db')
         cur = conn.cursor()
-        print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-                    VALUES ('{}','{}'.'{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
-        cur.execute("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-                    VALUES ('{}','{}'.'{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
-        print(self.id)
+        #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+        #            VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+        cur.execute("""INSERT INTO seekers_personal (fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+                    VALUES ({},'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(id,self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+
+        conn.commit()
         cur.close()
         conn.close()
-cur.close()
-conn.close()
+        id += 1
+
+#Find the seeker with specific id and return information
+def get_seeker(id):
+    conn = sqlite3.connect('seekers_personal.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM seekers_personal WHERE id = ?;",(id,))
+    row = cur.fetchone()
+    conn.commit()
+    cur.close()
+    conn.close()
+    return row
+
+def create_seeker(info):
+    fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences = info
+    user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+    user.upload_seeker(id)
+
+
+
+#cur.close()
+#conn.close()
 #create DB call in sepereate files (createdatabse file)
 # class function to create user (INSERT INTO etc.)
 # class function to get user from db
