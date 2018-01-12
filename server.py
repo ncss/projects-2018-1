@@ -2,7 +2,6 @@
 
 from tornado.ncss import Server, ncssbook_log
 
-
 def index_handler (request):
     request.write("Placeholder")
 
