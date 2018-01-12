@@ -39,6 +39,7 @@ class Seeker(object):
         self.experiences = experiences
 
     def upload_seeker(self,id):
+        """Stores seeker information in the database"""
         conn = sqlite3.connect('seekers_personal.db')
         cur = conn.cursor()
         #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
@@ -53,6 +54,7 @@ class Seeker(object):
 
 #Find the seeker with specific id and return information
 def get_seeker(id):
+    """Returns information about a seeker from the database."""
     conn = sqlite3.connect('seekers_personal.db')
     cur = conn.cursor()
     cur.execute("SELECT * FROM seekers_personal WHERE id = ?;",(id,))
@@ -60,9 +62,12 @@ def get_seeker(id):
     conn.commit()
     cur.close()
     conn.close()
-    return row
+    id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences = row
+    user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+    return user
 
 def create_seeker(info):
+    """Creates a new seeker."""
     fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences = info
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
     user.upload_seeker(id)
