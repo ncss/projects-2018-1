@@ -1,9 +1,7 @@
 # The Server
 from templating import render
 from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
-from database.seeker import Seeker
-from database.seeker import create_seeker
-from database.seeker import get_seeker
+from database.seeker import *
 
 #user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
@@ -30,7 +28,8 @@ def about_handler(request):
     request.write("Page Under Construction")
 
 def profilelistpage_handler(request):
-    render(request, 'profilelistpage.html')
+    seekers = get_seekers()
+    render(request, 'profilelistpage.html', {"seekers": seekers})
 
 def searchresult_handler(request):
     request.write("Page Under Construction")
@@ -66,10 +65,11 @@ def finished_profile_handler(request):
 def pagenotfound_handler(request):
     render(request, 'pagenotfound.html')
 
+
 server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
-server.register(r'/profilelistpage/',profilelistpage_handler)
+server.register(r'/profile/',profilelistpage_handler)
 server.register(r'/searchresult/', searchresult_handler)
 server.register(r'/positioninformation/(\d+)', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used

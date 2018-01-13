@@ -218,3 +218,15 @@ li{
   font-size: 18px;
   font-weight: 500;
 }
+
+/*profile list page styling*/
+.profile-picture-list{
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  justify-self: center;
+}
+
+.profile-list-item{
+  display: grid;
+}
