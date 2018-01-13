@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link href="/static/main.css" rel="stylesheet">
-     <title>Profiles</title>
- </head>
- <body>
-	 <header>
-		 <nav>
-			 <h1 class="logo">websitename/logo</h1>
-			 <ul>
-				 <li>About</li>
-				 <li>Profile</li>
-				 <li>Search</li>
-				 <li>Course Info</li>
-			 </ul>
-
-			 <ul class ="logins">
-				 <li>James</li>
-				 <li>Logout</li>
-			 </ul>
-		 </nav>
-	 </header>
-	 <main>
+{% include header.html %}
 		 <div id= "profile">
 		 <img id="profile-picture" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
 	 </div>
 		<article class="right-two">
 		 <h1>{{user.fname + ' ' + user.lname}}</h1>
-		 <h2>{{user.city}}, Australia</h2>
+		 <h2>{{user.city}}</h2>
 		 <h3>Email: {{user.email}} </h3>
 	</article>
 	<hr>
@@ -55,11 +32,6 @@
 		 <h4>Bio:</h4>
 		 <p>{{user.bio}}</p>
 	</article>
-</main>
-<footer>
-	<h5>footer</h5>
-</footer>
-	</body>
-</html>
+{% include footer.html %}
 
 <!--Once upon a time, in the middle of Zimbabwe, a James was found.  It was then lost five minutes later.  It now needs work. You will need a Masterball to capture James Curran. Once you do that, you will need to jump on a boat and head to Sydney, where you will find a wild Tim.  To capture the Tim, you will need to stun him with the words "Hacker voice: I'm in".  When both your James and Tim are at level 47, you will need to combine them at a combining thing, which is only located in Tasmania. Once combined, they will evolve into a NCSS.  Once your NCSS has beaten all of the University sponsors, it will produce a Sam. Sam will allow you access into Google. From there, you can enter a portal to the Apple headquarters.  There, you will find a legendary ghost-type Steve Jobs.  To catch him, you will need to find a Ultra legendary Bill Gates.  To capture Bill Gates, you will need to utilise all of your defeated sponsors and NCSS, as well as Sam, to overwhelm him with cryptography and mathematical questions. once you have captured both Bill gates and Steve Jobs, the final boss MOANA will appear, demanding a fight to the death.  Using all of the creatures, as well as all of the tech memes, you can defeat MOANA by launching a giant CBA fidget spinner at MOANA's face. To shield your eyes from the explosions of memes, be sure to wear your Google sunglasses.  Once MOANA has exploded you will be rewarded with a job at Atlassian. -->
