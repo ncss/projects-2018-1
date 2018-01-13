@@ -1,4 +1,8 @@
 import tornado
+import os.path
+import sys
+import json
+import database.company
 
 class ChatBotWebSockets(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -11,10 +15,6 @@ class ChatBotWebSockets(tornado.websocket.WebSocketHandler):
 
     def send_message(self, message):
         self.write_message(message)
-
-import os.path
-import sys
-import json
 
 from pprint import pprint
 
@@ -34,6 +34,10 @@ class ChatBot:
     def __init__(self):
         self.callback = None
 
+        self.language = ""
+        self.size = 0
+        self.formality = 0
+
     def send_message(self, message):
         ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 
@@ -47,10 +51,27 @@ class ChatBot:
 
         dictResponse = json.loads(response.read())
 
-        self.receive_message(dictResponse['result']['fulfillment']['speech'].strip())
+        responseMessage = dictResponse['result']['fulfillment']['speech'].strip()
+
+
+        try:
+            if responseMessage.startswith("____"):
+                self.size = int(message)
+
+                self.receive_message("I would recommend you checkout:")
+                self.receive_message(str(database.company.suggestComp(self.formality, self.size, self.language)[0]))
+
+            elif responseMessage.startswith("___"):
+                self.formality = int(message)
+            elif responseMessage.startswith("__"):
+                self.language = message
+        except ValueError:
+            self.receive_message("That wasn't a valid number.")
+
+        self.receive_message(responseMessage)
 
     def receive_message(self, message):
-        self.callback(message)
+        self.callback(message.strip("_"))
 
     def set_callback(self, callback):
         self.callback = callback

@@ -2,6 +2,7 @@
   .chat {
     position: fixed;
     bottom: 0;
+    z-index: 1000;
     right: 2rem;
     width: 16rem;
     height: 22rem;
@@ -12,7 +13,13 @@
     border-bottom: none;
     font-family: 'Arial';
     border-radius: 0.5rem 0.5rem 0 0;
-    overflow: hidden;;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .chat.hidden {
+    bottom: -20.5rem;
+
   }
 
   .heading {
@@ -23,6 +30,7 @@
     line-height: 1.5rem;
     background-color: rgb(51, 51, 51);
     position: relative;
+    cursor: pointer;
   }
 
   i.indicator {
@@ -74,6 +82,8 @@
     border-radius: 0.25rem;
     margin-bottom: 0.25rem;
     text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .message.server {
@@ -83,8 +93,8 @@
 </style>
 
 
-<div class="chat">
-  <div class="heading">Bec
+<div class="chat hidden" id="chatbot">
+  <div class="heading" id="chatHeading">Bec
 
     <i class="indicator"></i>
 
@@ -116,13 +126,13 @@
     updateScroll()
   }
 
-  function updateScroll(){
-    messages.scrollTo(0,document.querySelector(".scrollingContainer").scrollHeight);
-  }
-
-
   function send_message(theMessage){
     ws.send(theMessage);
+  }
+
+  chatHeading.onclick = (ev) => {
+    chatbot.classList.toggle('hidden');
+
   }
 
   chatForm.onsubmit = (ev) => {
@@ -132,11 +142,11 @@
     let messageLM = document.createElement("div");
     messageLM.textContent = chatbotInput.value;
     messageLM.classList.add("message");
-    messageLM.scrollIntoView(true);
 
     chatbotInput.value = "";
-
     messages.appendChild(messageLM);
+    messageLM.scrollIntoView(true);
+
 updateScroll()
   }
 </script>
