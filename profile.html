@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="static/main.css" rel="stylesheet">
+		<link href="/static/main.css" rel="stylesheet">
      <title>Profiles</title>
  </head>
  <body>
@@ -32,19 +32,19 @@
 	<article>
 		 <h4>Skills:</h4>
 		 <ul>
-	         {% for item in user.skills.split(',') %}
+	         {% for item in user.skills %}
 	            <li>{item}</li>
 	         {% endfor %}
 		 </ul>
 		 <h4>Experiences:</h4>
 		 <ul>
-	         {% for item in user.experiences.split(',') %}
+	         {% for item in user.experiences %}
 	            <li>{item}</li>
 	         {% endfor %}
 		 </ul>
 		 <h4>Hobbies:</h4>
 		 <ul>
-	         {% for item in user.hobbies.split(',') %}
+	         {% for item in user.hobbies %}
 	            <li>{item}</li>
 	         {% endfor %}
 		 </ul>
