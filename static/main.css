@@ -94,6 +94,9 @@ footer {
   color: RGB(153,153,153);
   text-align:center;
 }
+#logo{
+  height: 80px;
+}
 
 footer>h4{
   width: 60%;

@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link href="/static/main.css" rel="stylesheet">
-     <title>Profiles</title>
- </head>
- <body>
-	 <header>
-		 <nav>
-			 <h1 class="logo">websitename/logo</h1>
-			 <ul>
-				 <li>About</li>
-				 <li>Profile</li>
-				 <li>Search</li>
-				 <li>Positions</li>
-			 </ul>
-			 <ul class ="logins">
-				 <li>James</li>
-				 <li>Logout</li>
-			 </ul>
-		 </nav>
-	 </header>
-	 <main>
+{% include header.html%}
+
      <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search">
        <select id="typeschoice" name="type">
           <option value="alltypes" selected>all types</option>
@@ -44,3 +23,5 @@
    </footer>
     </body>
    </html>
+
+{% include footer.html %}
