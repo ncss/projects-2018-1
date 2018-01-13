@@ -78,6 +78,7 @@ def create_seeker(db_file, info):
     conn.commit()
     cur.close()
     conn.close()
+    return user
 
 def get_experience(db_file, id):
     """Returns information about an experience from the database."""
@@ -110,9 +111,9 @@ def get_seekers(db_file):
 
     return info
 
-def get_seeker_by_username(username):
+def get_seeker_by_username(db_file, username):
     """Returns information about a seeker from the database."""
-    conn = sqlite3.connect('./seekers_personal.db')
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM seekers_personal WHERE username = ?;",(username,))
     row = cur.fetchone()
@@ -127,6 +128,6 @@ def get_seeker_by_username(username):
 
 #cur.close()
 #conn.close()
-#create DB call in sepereate files (createdatabse file)
+#create DB call in sepereate files (create databse file)
 # class function to create user (INSERT INTO etc.)
 # class function to get user from db

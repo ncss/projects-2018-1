@@ -19,7 +19,7 @@ def profile_handler (request, user_id):
     '''
     customer = get_seeker('./database/seekers_personal.db', user_id)
     if customer == None:
-        render(request, "pagenotfound.html",{"login": check_logged_in(request)})
+        render(request, "pagenotfound.html", {"login": check_logged_in(request)})
     else:
         render(request, "profile.html", {"user": customer, "login": check_logged_in(request)})
 
@@ -52,7 +52,7 @@ def login_handler(request):
     render(request, "login.html", {"error": "", "login": check_logged_in(request)})
 
 def post_login_handler(request):
-    user = get_seeker_by_username(request.get_field('username'))
+    user = get_seeker_by_username('./database/seekers_personal.db', request.get_field('username'))
     if user:
         # check if password is correct
         if user.password == request.get_field('password'):
@@ -67,7 +67,7 @@ def check_logged_in(request):
     user_id = request.get_secure_cookie('user_id')
     print(user_id)
     if user_id:
-        return get_seeker(user_id.decode("UTF-8"))
+        return get_seeker('./database/seekers_personal.db', user_id.decode("UTF-8"))
 
 def logout_handler(request):
     request.clear_cookie('user_id')
