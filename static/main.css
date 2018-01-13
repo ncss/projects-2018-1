@@ -188,6 +188,10 @@ li{
   font-weight: 400;
   color: RGB(140,98,56);
   text-decoration: none;
+  padding-left: 105px;
+  padding-right: 105px;
+  padding-top: 130px;
+  padding-bottom: 130px;
 }
 
 #searchdiv{
@@ -195,10 +199,13 @@ li{
 }
 #assistantdiv{
   background-image: url("assistantimage.jpg");
+  background-size:
 }
-#mapdiv{
-  background-image: url("mapimage.jpg");
+
+#profilediv{
+  background-image: url("profileimage.jpg");
 }
+
 /*styling creator profile*/
 #create-profile{
   margin: 0 10% 0 10%;
