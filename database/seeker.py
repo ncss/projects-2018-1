@@ -1,4 +1,5 @@
 import sqlite3
+from position import *
 
 class Review(object):
     def __init__(self, rating, content, person_id, position_id, id=None):
@@ -44,7 +45,7 @@ class Seeker(object):
 
         return "fname: '{}', lname: '{}', birthdate: '{}', phone: '{}', email: '{}', city: '{}', eductaion: '{}', hobbies: '{}', skills: '{}', id: '{}', reviews: '{}', username: '{}', password: '{}', bio: '{}'".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.id, self.reviews, self.username, self.password, self.bio)
 
-    def add_review(self,rating, content, position_id=None):
+    def add_review(self,rating, content, position_id):
 
         rev = Review(rating, content, self.id, position_id)
         rev.save()
@@ -61,7 +62,7 @@ def get_seeker(id):
     cur.close()
     conn.close()
     if row == None:
-        return None 
+        return None
     id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
     return user
@@ -113,6 +114,23 @@ def get_seekers():
     conn.close()
 
     return info
+
+def get_review_by_position(position_id):
+    conn = sqlite3.connect('./seekers_personal.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM reviews WHERE position_id=?;",(position_id,))
+
+    info = []
+    for row in cur:
+        id, rating, content, person_id, position_id = row
+        review = Review(rating, content, person_id, position_id)
+        info.append(review)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+    return info
+
 
 #cur.close()
 #conn.close()
