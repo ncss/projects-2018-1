@@ -1,14 +1,17 @@
 {% include header.html %}
 
 {% for people in seekers %}
-
-<div class = "profile-list-item">
-<img class = "profile-picture-list" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
-</div>
-<article class="right-two">
-<h2>{{people.fname + ' ' + people.lname}}</h2>
-</article>
-<hr>
+  <div class = "profile-list-item">
+    <a href="/profile/{{people.id}}/" class="profile-picture-list">
+      <img class = "profile-picture-list" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
+    </a>
+  </div>
+    <article class="right-two">
+      <a href="/profile/{{people.id}}/">
+        <h2>{{people.fname + ' ' + people.lname}}</h2>
+      </a>
+    </article>
+  <hr>
 {% end for %}
 
 
