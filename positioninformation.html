@@ -35,6 +35,21 @@
 	<article class="full-width" id="positionblurb">
 		<p>{{position.blurb}}</p>
 	</article>
+	<hr>
+	<!-- review section start here -->
+	<article class = "full-width">
+	<h2>Reviews </h2>
+</article>
+{% for section in review %}
+	{% if section.position_id == position.id %}
+<hr>
+<article class="full-width">
+	<h3>{{review.person_id}}</h3>
+	<p class="reviews">{{review.content}}</p>
+  </article>
+	{% end if %}
+	{% end for %}
+
 </main>
 <footer>
 	<h5>footer</h5>

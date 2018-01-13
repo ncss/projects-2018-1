@@ -41,8 +41,9 @@ def positionlist_handler(request):
 
 def position_handler(request, page_id):
     position_information = get_position(page_id)
-    render(request, "positioninformation.html", {'position': position_information})
-
+    review_information = get_review_by_position(page_id)
+    render(request, "positioninformation.html", {'position': position_information, 'review': review_information})
+    
 def map_handler(request):
     request.write("Page Under Construction")
 
