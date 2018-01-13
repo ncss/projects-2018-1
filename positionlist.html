@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link href="static/main.css" rel="stylesheet">
-     <title>Profiles</title>
- </head>
- <body>
-	 <header>
-		 <nav>
-			 <h1 class="logo">websitename/logo</h1>
-			 <ul>
-				 <li>About</li>
-				 <li>Profile</li>
-				 <li>Search</li>
-				 <li>Positions</li>
-			 </ul>
-			 <ul class ="logins">
-				 <li>James</li>
-				 <li>Logout</li>
-			 </ul>
-		 </nav>
-	 </header>
-	 <main>
+{% include header.html%}
+
      <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search">
        <select id="typeschoice" name="type">
           <option value="alltypes" selected>all types</option>
@@ -29,7 +8,7 @@
           <option value="workexperience">Work experience</option>
       </select>
       <button id="searchbutton" name="searchbutton">Search</button>
-     <!--{% for item in positions %}-->
+     <!--{#{% for item in positions %}#}-->
      <img id="positionimage" src="static/computer.jpg">
      <article class="right-two">
        <h2><a href="/position/{{position.id}}">{{position.positionname}}</a> </h2>
@@ -37,10 +16,5 @@
        <p>{{position.blurb[:100]}}...</p>
      </article>
      <hr>
-     <!--{% end for %}-->
-   </main>
-   <footer>
-    <h5>footer</h5>
-   </footer>
-    </body>
-   </html>
+     <!--{#{% end for %}#}-->
+{% include footer.html %}
