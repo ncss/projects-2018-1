@@ -1,18 +1,22 @@
 import sqlite3
 
-class Experience(object):
-    def __init__(self, companyname, experiencetype, rating, person_id):
-        self.id = None
-        self.companyname = companyname
-        self.experiencetype = experiencetype
+class Review(object):
+    def __init__(self, rating, content, person_id, position_id, id=None):
+        self.id = id
         self.rating = rating
+        self.content = content
         self.person_id = person_id
+        self.position_id = position_id
+
+    def __str__(self):
+        return "id: {}, rating: {}, content: {}, person_id: {}, position_id: {}".format(self.id, self.rating, self.content, self.person_id, self.position_id)
+
 
     def save(self):
         conn = sqlite3.connect('./seekers_personal.db')
         cur = conn.cursor()
-        cur.execute("""INSERT INTO experience (companyname, experiencetype, rating, person_id)
-        VALUES (?, ?, ?, ?)""", (self.companyname, self.experiencetype, self.rating, self.person_id))
+        cur.execute("""INSERT INTO reviews (rating, content, person_id, position_id)
+        VALUES (?, ?, ?, ?)""", (self.rating, self.content, self.person_id, self.position_id))
         self.id = cur.lastrowid
         conn.commit()
         cur.close()
@@ -32,19 +36,19 @@ class Seeker(object):
         self.education = education
         self.hobbies = hobbies
         self.skills = skills
-        self.experiences = []
+        self.reviews = []
         self.username = username
         self.password = password
         self.bio = bio
     def __str__(self):
 
-        return "fname: '{}', lname: '{}', birthdate: '{}', phone: '{}', email: '{}', city: '{}', eductaion: '{}', hobbies: '{}', skills: '{}', id: '{}', experiences: '{}', username: '{}', password: '{}', bio: '{}'".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.id, self.experiences, self.username, self.password, self.bio)
+        return "fname: '{}', lname: '{}', birthdate: '{}', phone: '{}', email: '{}', city: '{}', eductaion: '{}', hobbies: '{}', skills: '{}', id: '{}', reviews: '{}', username: '{}', password: '{}', bio: '{}'".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.id, self.reviews, self.username, self.password, self.bio)
 
-    def add_experience(self, companyname, experiencetype, rating):
+    def add_review(self,rating, content, position_id=None):
 
-        exp = Experience(companyname, experiencetype, rating, self.id)
-        exp.save()
-        self.experiences.append(exp.id)
+        rev = Review(rating, content, self.id, position_id)
+        rev.save()
+        self.reviews.append(rev.id)
 
 #Find the seeker with specific id and return information
 def get_seeker(id):
@@ -75,18 +79,18 @@ def create_seeker(info):
     cur.close()
     conn.close()
 
-def get_experience(id):
+def get_review(id):
     """Returns information about an experience from the database."""
     conn = sqlite3.connect('./seekers_personal.db')
     cur = conn.cursor()
-    cur.execute("SELECT * FROM experience WHERE id = ?;",(id,))
+    cur.execute("SELECT * FROM reviews WHERE id = ?;",(id,))
     row = cur.fetchone()
     conn.commit()
     cur.close()
     conn.close()
-    id, companyname, experiencetype, rating, person_id = row
-    experience = Experience(companyname, experiencetype, rating, person_id)
-    return experience
+    id, rating, content, person_id, position_id = row
+    rev = Review(rating, content, person_id, position_id, id)
+    return rev
 
 def get_seekers():
     conn = sqlite3.connect('./seekers_personal.db')
