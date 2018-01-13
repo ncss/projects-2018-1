@@ -21,7 +21,14 @@
 		 </nav>
 	 </header>
 	 <main>
-     <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search"><button id="searchbutton" name="searchbutton">Search</button>
+     <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search">
+       <select id="typeschoice" name="type">
+          <option value="alltypes" selected>all types</option>
+          <option value="internship">Internship</option>
+          <option value="apprenticeships">Apprenticeships</option>
+          <option value="workexperience">Work experience</option>
+      </select>
+      <button id="searchbutton" name="searchbutton">Search</button>
      <!--{% for item in positions %}-->
      <img id="positionimage" src="static/computer.jpg">
      <article class="right-two">

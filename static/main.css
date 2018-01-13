@@ -255,3 +255,10 @@ li{
   width: 100px;
   font-size: 20px;
 }
+#typeschoice{
+  margin: 20px;
+  margin-left: none;
+  height: 35px;
+  width: 200px;
+  font-size: 20px;
+}
