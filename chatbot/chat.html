@@ -61,25 +61,24 @@
   .messages {
     overflow-y: scroll;
     padding: 1rem;
+    margin-bottom: 2rem;
+    max-height: 16.5rem;
   }
 
   .message {
-    background-color: #4DD0E1;
+    background-color: #FFF59D;
     padding: 0.25rem;
     border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
+    text-align: right;
+  }
 
+  .message.server {
+    background-color: #4DD0E1;
+    text-align: left;
   }
 </style>
 
-<script>
-
-
-
-  function send_message(){
-
-  }
-
-</script>
 
 <div class="chat">
   <div class="heading">Chatbot
@@ -88,16 +87,53 @@
 
   </div>
 
-  <div class="messages">
+  <div class="messages" id="messages">
 
-    <div class="message">
-      Hello
-    </div>
+
+
   </div>
-
-  <form>
+  <form id="chatForm">
     <div class="input">
-      <input type="text">
+      <input type="text" placeholder="Message" id="chatbotInput">
     </div>
   </form>
 </div>
+
+<script>
+
+  window.ws = new WebSocket("ws://localhost:8888/ws/");
+  ws.onmessage = (message) => {
+    window.lastMessage = message;
+    let messageLM = document.createElement("div");
+    messageLM.textContent = message.data;
+    messageLM.classList.add("message", "server");
+
+    messages.appendChild(messageLM)
+    messageLM.scrollIntoView(false);
+    updateScroll()
+  }
+
+  function updateScroll(){
+    messages.scrollTo(0,document.querySelector(".scrollingContainer").scrollHeight);
+  }
+
+
+  function send_message(theMessage){
+    ws.send(theMessage);
+  }
+
+  chatForm.onsubmit = (ev) => {
+    ev.preventDefault();
+    send_message(chatbotInput.value);
+
+    let messageLM = document.createElement("div");
+    messageLM.textContent = chatbotInput.value;
+    messageLM.classList.add("message");
+    messageLM.scrollIntoView(false);
+
+    chatbotInput.value = "";
+
+    messages.appendChild(messageLM);
+updateScroll()
+  }
+</script>

@@ -5,11 +5,15 @@ import tornado
 from database.seeker import *
 from database.position import Position
 from database.position import get_position
+
 from chatbot.ai import ChatBotWebSockets
 #user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
 def index_handler (request):
     return render(request, 'index.html')
+
+def chat_handler (request):
+    return render(request, 'chatbot/chat.html')
 
 def profile_handler (request, user_id):
     '''
@@ -72,19 +76,10 @@ def finished_profile_handler(request):
 def pagenotfound_handler(request):
     render(request, 'pagenotfound.html')
 
-class EchoWebSocket(tornado.websocket.WebSocketHandler):
-    def open(self):
-        print("WebSocket opened")
-
-    def on_message(self, message):
-        self.write_message(u"You said: " + message)
-
-    def on_close(self):
-        print("WebSocket closed")
-
 server = Server() # Create a server object
 server.register(r'/', index_handler)
-server.register(r'/ws/', EchoWebSocket)
+server.register(r'/ws/', ChatBotWebSockets)
+server.register(r'/chat/', chat_handler)
 
 server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
