@@ -7,10 +7,12 @@
     height: 22rem;
     background-color: #EEEEEE;
 
-    border: 2px solid #BDBDBD;
+    border: 2px solid rgb(51, 51, 51);
+    /* rgb(198, 156, 109); */
     border-bottom: none;
     font-family: 'Arial';
     border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;;
   }
 
   .heading {
@@ -19,7 +21,7 @@
     color: white;
     height: 1.5rem;
     line-height: 1.5rem;
-    background-color: #BDBDBD;
+    background-color: rgb(51, 51, 51);
     position: relative;
   }
 
@@ -42,6 +44,7 @@
     width: 100%;
     background-color: #EFEFEF
     padding: 0.25rem;
+    border-top: 1px solid rgb(198, 156, 109);
   }
 
   input {
@@ -66,7 +69,7 @@
   }
 
   .message {
-    background-color: #FFF59D;
+    background-color: #B2DFDB;
     padding: 0.25rem;
     border-radius: 0.25rem;
     margin-bottom: 0.25rem;
@@ -74,14 +77,14 @@
   }
 
   .message.server {
-    background-color: #4DD0E1;
+    background-color: rgba(198, 156, 109, 0.2);
     text-align: left;
   }
 </style>
 
 
 <div class="chat">
-  <div class="heading">Chatbot
+  <div class="heading">Bec
 
     <i class="indicator"></i>
 
@@ -109,7 +112,7 @@
     messageLM.classList.add("message", "server");
 
     messages.appendChild(messageLM)
-    messageLM.scrollIntoView(false);
+    messageLM.scrollIntoView(true);
     updateScroll()
   }
 
@@ -129,7 +132,7 @@
     let messageLM = document.createElement("div");
     messageLM.textContent = chatbotInput.value;
     messageLM.classList.add("message");
-    messageLM.scrollIntoView(false);
+    messageLM.scrollIntoView(true);
 
     chatbotInput.value = "";
 
