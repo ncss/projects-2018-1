@@ -3,16 +3,72 @@
         "name": "Google",
         "url": "https://careers.google.com/",
         "formality": "2",
-        "finance": "0",
-        "difficulty": "7",
-        "size": "10"
+        "languages": ["Java", "C++", "Python", "Go"],
+        "size": "10",
+        "locations": ["Sydney"]
     },
     {
         "name": "Atlassian",
-        "url": "https://careers.google.com/",
+        "url": "https://www.atlassian.com/company/careers",
+        "languages": ["Java", "C++", "Python", "Go"],
         "formality": "4",
-        "finance": "0",
-        "difficulty": "7",
-        "size": "6"
+        "size": "8",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "WiseTech Global",
+        "url": "http://www.wisetechglobal.com/careers/current-openings",
+        "languages": ["C#", "Python"],
+        "formality": "7",
+        "size": "6",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Freelancer",
+        "url": "https://www.freelancer.com.au/careers",
+        "languages": ["PHP", "Python", "Javascript"],
+        "formality": "4",
+        "size": "2",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Optiver",
+        "url": "https://www.optiver.com/ap/en/job-opportunities",
+        "languages": ["C++", "Python"],
+        "formality": "8",
+        "size": "6",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Commonwealth Bank",
+        "url": "https://www.commbank.com.au/about-us/careers.html",
+        "languages": ["Python"],
+        "formality": "10",
+        "size": "8",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Macquarie",
+        "url": "http://www.careers.macquarie.com/cw/en/listing/",
+        "languages": ["Java"],
+        "formality": "10",
+        "size": "7",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Data61",
+        "url": "https://www.csiro.au/en/Careers",
+        "languages": ["Python", "Haskell", "Scala"],
+        "formality": "5",
+        "size": "6",
+        "locations": ["Sydney"]
+    },
+    {
+        "name": "Dolby",
+        "url": "http://www.careers.macquarie.com/cw/en/listing/",
+        "languages": ["C", "C++", "Python"],
+        "formality": "9",
+        "size": "6",
+        "locations": ["Sydney"]
     }
 ]

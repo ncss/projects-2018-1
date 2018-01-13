@@ -8,8 +8,8 @@ class Experience(object):
         self.rating = rating
         self.person_id = person_id
 
-    def save(self):
-        conn = sqlite3.connect('./seekers_personal.db')
+    def save(db_file, self):
+        conn = sqlite3.connect(db_file)
         cur = conn.cursor()
         cur.execute("""INSERT INTO experience (companyname, experiencetype, rating, person_id)
         VALUES (?, ?, ?, ?)""", (self.companyname, self.experiencetype, self.rating, self.person_id))
@@ -47,9 +47,9 @@ class Seeker(object):
         self.experiences.append(exp.id)
 
 #Find the seeker with specific id and return information
-def get_seeker(id):
+def get_seeker(db_file, id):
     """Returns information about a seeker from the database."""
-    conn = sqlite3.connect('./seekers_personal.db')
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM seekers_personal WHERE id = ?;",(id,))
     row = cur.fetchone()
@@ -64,11 +64,11 @@ def get_seeker(id):
 
 
 
-def create_seeker(info):
+def create_seeker(db_file, info):
     """Creates a new seeker."""
     fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = info
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio)
-    conn = sqlite3.connect('./seekers_personal.db')
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
     #            VALUES ('?','?','?','?','?','?','?','?','?','?','?')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
@@ -79,9 +79,9 @@ def create_seeker(info):
     cur.close()
     conn.close()
 
-def get_experience(id):
+def get_experience(db_file, id):
     """Returns information about an experience from the database."""
-    conn = sqlite3.connect('./seekers_personal.db')
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM experience WHERE id = ?;",(id,))
     row = cur.fetchone()
@@ -92,8 +92,8 @@ def get_experience(id):
     experience = Experience(companyname, experiencetype, rating, person_id)
     return experience
 
-def get_seekers():
-    conn = sqlite3.connect('./seekers_personal.db')
+def get_seekers(db_file):
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM seekers_personal;")
 

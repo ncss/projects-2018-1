@@ -8,7 +8,12 @@ body{
   font-family: 'Open Sans', sans-serif;
   margin: 0;
 }
-
+input[type=submit] {
+  cursor: pointer;
+}
+a, button{
+  cursor: pointer;
+}
 a, a:link {
   color: RGB(198,156,109);
 }
@@ -30,6 +35,7 @@ h1{
   font-size: 50px;
   font-family: 'Source Sans Pro';
   margin: 20px 0 20px 0;
+  grid-column-end: span 3;
 }
 
 h2{
@@ -87,6 +93,9 @@ footer {
   padding: 10px;
   color: RGB(153,153,153);
   text-align:center;
+}
+#logo{
+  height: 80px;
 }
 
 footer>h4{
@@ -220,6 +229,10 @@ li{
   font-weight: 500;
 }
 
+#create-account h1{
+  text-align:center;
+}
+
 /*profile list page styling*/
 .profile-picture-list{
   width: 100px;
@@ -230,6 +243,7 @@ li{
 
 .profile-list-item{
   display: grid;
+}
 /*position information page styling*/
 #positionimage{
   grid-column: 1 / span 1;

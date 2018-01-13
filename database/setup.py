@@ -1,20 +1,23 @@
 import sqlite3
 import json
+import os
 
-conn = sqlite3.connect('./seekers_personal.db')
+f = os.path.dirname(os.path.abspath(__file__))
+print(f)
+conn = sqlite3.connect(os.path.join(f, "../seekers_personal.db"))
 cur = conn.cursor()
 
-cur.executescript(open('database/seekers_personal.sql', 'rU').read())
-cur.executescript(open('database/experience.sql', 'rU').read())
-cur.executescript(open('database/company.sql', 'rU').read())
+cur.executescript(open(os.path.join(f, "seekers_personal.sql"), 'rU').read())
+cur.executescript(open(os.path.join(f, 'experience.sql'), 'rU').read())
+cur.executescript(open(os.path.join(f, 'company.sql'), 'rU').read())
+cur.executescript(open(os.path.join(f, 'position.sql'), 'rU').read())
 
-for company in json.loads(open('database/companies.json').read()):
-    cur.execute("""INSERT INTO company (name, url, formality, finance, difficulty, size)
+for company in json.loads(open(os.path.join(f, 'companies.json')).read()):
+    cur.execute("""INSERT INTO company (name, url, formality, languages, locations, size)
                    VALUES ('{}','{}','{}','{}','{}','{}')""".format(
                    company['name'], company['url'], company['formality'],
-                   company['finance'], company['difficulty'], company['size']))
+                   ','.join(company['languages']), ','.join(company['locations']), company['size']))
 
-cur.executescript(open('database/position.sql', 'rU').read())
 conn.commit()
 cur.close()
 conn.close()

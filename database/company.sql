@@ -3,7 +3,7 @@ CREATE TABLE company (
     name TEXT NOT NULL,
     url TEXT NOT NULL,
     formality INTEGER NOT NULL,
-    finance INTEGER NOT NULL,
-    difficulty INTEGER NOT NULL,
+    languages TEXT NOT NULL,
+    locations TEXT NOT NULL,
     size INTEGER NOT NULL
 );
