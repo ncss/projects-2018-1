@@ -14,10 +14,10 @@ create_seeker(["James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", 
 
 create_position(["Junior", "Google", "3 months", "Internship", "Sydney, Australia", "google.com/internposition", "for a person at Uni"])
 
-print(get_position(1).positionlength)
+#print(get_position(1).positionlength)
 
 
-print(return_all_positions())
+#print(return_all_positions())
 
 #exp = Experience("GOOGLE", "Intern", "5/5", var.id)
 #exp.save()
