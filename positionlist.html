@@ -1,5 +1,14 @@
 {% include header.html%}
 
+<script>
+
+function submitForm() {
+  var newUrl = window.location.origin + '/searchresult/' + searchbar.value + '/' + typeschoice.value + '/';
+  window.location.replace(newUrl);
+}
+
+</script>
+
      <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search">
        <select id="typeschoice" name="type">
           <option value="alltypes" selected>all types</option>
@@ -21,6 +30,10 @@
    <footer>
     <h5>footer</h5>
    </footer>
+
+   <script>
+   searchbutton.onclick = submitForm;
+   </script>
     </body>
    </html>
 
