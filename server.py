@@ -54,8 +54,14 @@ def profile_creator_handler(request):
 # Handler for creating a new profile (for submiting the form, handle the returned post)
 def finished_profile_handler(request):
     #add username later
-    profile_fields = ['fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies', 'skills']
+    profile_fields = ['fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies', 'skills', 'username', 'password', 'bio']
     field = []
+
+    password = request.get_field('password')
+    confpass = request.get_field('passwordconf')
+
+    if password != confpass:
+        request.redirect('/profilecreation/')
 
     for f in profile_fields:
         field.append(request.get_field(f))
@@ -67,7 +73,7 @@ def pagenotfound_handler(request):
     with open('pagenotfound.html') as n:
         pagenotfound_html = n.read()
         request.write(pagenotfound_html) # TEMPORARY STAND IN HTML AND CSS FILE
-        
+
 server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
