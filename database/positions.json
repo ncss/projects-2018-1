@@ -1,0 +1,56 @@
+[
+    {
+        "id": "1",
+        "positionname": "Software Engineer",
+        "companyname": "Google",
+        "positionlength": "12 months",
+        "positiontype": "Apprenticeship",
+        "address": "48 Pirrama Rd, Pyrmont NSW 2009",
+        "companyurl": "https://careers.google.com/students/",
+        "blurb": "A medium level of programming knowledge is required."
+    },
+
+    {
+        "id": "2",
+        "positionname": "Junior Software Developer",
+        "companyname": "Google",
+        "positionlength": "6 months",
+        "positiontype": "Internship",
+        "address": "48 Pirrama Rd, Pyrmont NSW 2009",
+        "companyurl": "https://careers.google.com/students/",
+        "blurb": "A person to join a small team on a secret project."
+    },
+
+    {
+        "id": "3",
+        "positionname": "Intermediate Web Developer",
+        "companyname": "Atlassian",
+        "positionlength": "3 months",
+        "positiontype": "Internship",
+        "address": "363 George St, Sydney NSW 2000",
+        "companyurl": "https://www.atlassian.com/",
+        "blurb": "A summer internship program for current Univeristy students."
+    },
+
+    {
+        "id": "4",
+        "positionname": "Student Placement Software Development",
+        "companyname": "Atlassian",
+        "positionlength": "2 weeks",
+        "positiontype": "Work Experience",
+        "address": "363 George St, Sydney NSW 2000",
+        "companyurl": "https://www.atlassian.com/",
+        "blurb": "A high school student with a strong insterest in computer programming."
+    },
+
+    {
+        "id": "5",
+        "positionname": "Student Placement Industry Experience",
+        "companyname": "WiseTech",
+        "positionlength": "3 weeks",
+        "positiontype": "Work Experience",
+        "address": "3a/72 O Riordan St, Alexandria NSW 2015",
+        "companyurl": "http://www.wisetechglobal.com/",
+        "blurb": "For a high school student to experience working at WiseTech"
+    }
+]
