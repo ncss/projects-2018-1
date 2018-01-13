@@ -4,6 +4,7 @@ from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The 
 from database.seeker import *
 from database.position import Position
 from database.position import get_position
+from database.position import return_all_positions
 
 #user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
@@ -37,7 +38,8 @@ def about_handler(request):
     request.write("Page Under Construction")
 
 def positionlist_handler(request):
-    render(request, "positionlist.html", {"position": position_id})
+    positionlist = return_all_positions()
+    render(request, "positionlist.html", {"position": positionlist})
 
 def position_handler(request, page_id):
     position_information = get_position(page_id)
@@ -77,7 +79,7 @@ server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
 server.register(r'/searchresult/', searchresult_handler)
-#server.register(r'/position/', positionlist_handler)
+server.register(r'/position/', positionlist_handler)
 server.register(r'/position/(\d+)/', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/map/', map_handler)

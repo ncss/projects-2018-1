@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="static/main.css" rel="stylesheet">
+		<link href="/static/main.css" rel="stylesheet">
      <title>Profiles</title>
  </head>
  <body>
@@ -29,15 +29,15 @@
           <option value="workexperience">Work experience</option>
       </select>
       <button id="searchbutton" name="searchbutton">Search</button>
-     <!--{% for item in positions %}-->
-     <img id="positionimage" src="static/computer.jpg">
+     {% for item in position %}
+     <img id="positionimage" src="/static/computer.jpg">
      <article class="right-two">
-       <h2><a href="/position/{{position.id}}">{{position.positionname}}</a> </h2>
-       <h3>{{position.positiontype}} at {{position.companyname}}</h3>
-       <p>{{position.blurb[:100]}}...</p>
+       <h2><a href="/position/{{item.id}}">{{item.positionname}}</a> </h2>
+       <h3>{{item.positiontype}} at {{item.companyname}}</h3>
+       <p>{{item.blurb[:100]}}...</p>
      </article>
      <hr>
-     <!--{% end for %}-->
+     {% end for %}
    </main>
    <footer>
     <h5>footer</h5>
