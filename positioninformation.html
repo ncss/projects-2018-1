@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="/static/main.css" rel="stylesheet">
+     <title>Profiles</title>
+ </head>
+ <body>
+	 <header>
+		 <nav>
+			 <h1 class="logo">websitename/logo</h1>
+			 <ul>
+				 <li>About</li>
+				 <li>Profile</li>
+				 <li>Search</li>
+				 <li>Course Info</li>
+			 </ul>
+
+			 <ul class ="logins">
+				 <li>James</li>
+				 <li>Logout</li>
+			 </ul>
+		 </nav>
+	 </header>
+	 <main>
+		 <h1 class="full-width">{{position.positionname}}</h1>
+		 <img class="left-two" id="positionimage" src="/static/computer.jpg">
+		 <article class="right-one">
+ 		 <h2>{{position.companyname}}</h2>
+ 		 <h3>Term: {{position.positionlength}}</h3>
+		 <h3>{{position.positiontype}}</h3>
+		 <h3>{{position.address}}</h3>
+		 <a href = "{{position.companyurl}}">Link to Apply</a>
+ 	</article>
+	<hr>
+	<article class:"full-width" id="positionblurb">
+		<p>{{position.blurb}}</p>
+	</article>
+</main>
+<footer>
+	<h5>footer</h5>
+</footer>
+	</body>
+</html>

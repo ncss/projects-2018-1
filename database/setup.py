@@ -14,6 +14,7 @@ for company in json.loads(open('database/companies.json').read()):
                    company['name'], company['url'], company['formality'],
                    company['finance'], company['difficulty'], company['size']))
 
+cur.executescript(open('database/position.sql', 'rU').read())
 conn.commit()
 cur.close()
 conn.close()
