@@ -1,5 +1,5 @@
 import sqlite3
-from position import *
+from .position import *
 
 class Review(object):
     def __init__(self, rating, content, person_id, position_id, id=None):
