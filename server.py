@@ -18,11 +18,12 @@ def profile_handler (request, user_id):
             profile_html = render(profile_html, {"user": user})
             request.write(profile_html)
     '''
-    #try:
     customer = get_seeker(user_id)
-    render(request, "profile.html", {"user": customer})
-    #except:
-        #render(request, "usernotfound.html")
+    if customer == None:
+        render(request, "pagenotfound.html")
+    else:
+        render(request, "profile.html", {"user": customer})
+
 
 
 def about_handler(request):
