@@ -21,11 +21,11 @@ def profile_handler (request, user_id):
 def about_handler(request):
     request.write("Page Under Construction")
 
-def searchresult_handler(request):
-    request.write("Page Under Construction")
+def positionlist_handler(request):
+    render(request, "positionlist.html", {"position": position_id})
 
 def position_handler(request, page_id):
-    position_information = get_position(user_id)
+    position_information = get_position(page_id)
     render(request, "positioninformation.html", {'position': position_information})
 
 def map_handler(request):
@@ -57,8 +57,8 @@ def pagenotfound_handler(request):
 server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
-server.register(r'/searchresult/', searchresult_handler)
-server.register(r'/positioninformation/(\d+)/', position_handler) # Dynamic page | takes in a user id which is used
+#server.register(r'/position/', positionlist_handler)
+server.register(r'/position/(\d+)/', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/map/', map_handler)
 server.register(r'/profilecreation/', profile_creator_handler, post = finished_profile_handler)
