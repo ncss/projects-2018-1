@@ -17,11 +17,11 @@
 	<article class = "full-width">
 	<h2>Reviews </h2>
 </article>
+<hr>
 {% for section in review %}
 	{% if section.position_id == position.id %}
-<hr>
 <article class="full-width">
-	<h3>{{section.person_id}}</h3>
+	<h3>{{user[section.person_id].fname + " " + user[section.person_id].lname}}</h3>
 	<p class="reviews">{{section.content}}</p>
   </article>
 	{% end if %}
