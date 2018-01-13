@@ -1,10 +1,11 @@
 # The Server
 from templating import render
 from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
+import tornado
 from database.seeker import *
 from database.position import Position
 from database.position import get_position
-
+from chatbot.ai import ChatBotWebSockets
 #user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
 def index_handler (request):
@@ -71,9 +72,20 @@ def finished_profile_handler(request):
 def pagenotfound_handler(request):
     render(request, 'pagenotfound.html')
 
+class EchoWebSocket(tornado.websocket.WebSocketHandler):
+    def open(self):
+        print("WebSocket opened")
+
+    def on_message(self, message):
+        self.write_message(u"You said: " + message)
+
+    def on_close(self):
+        print("WebSocket closed")
 
 server = Server() # Create a server object
 server.register(r'/', index_handler)
+server.register(r'/ws/', EchoWebSocket)
+
 server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
 server.register(r'/searchresult/', searchresult_handler)

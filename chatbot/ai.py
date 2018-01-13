@@ -13,11 +13,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
-
-
-
-
 import tornado
 
 
@@ -35,12 +30,6 @@ class ChatBotWebSockets(tornado.websocket.WebSocketHandler):
     def send_message(self, message):
         self.write_message(message)
 
-
-ws = ChatBotWebSockets()
-
-server = Server() # Create a server object
-server.register(r'/', ChatBotWebSockets)
-server.run() # Runs Server
 
 # html
 # Animate
