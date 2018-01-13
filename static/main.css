@@ -281,3 +281,9 @@ li{
   width: 200px;
   font-size: 20px;
 }
+/*reviews in bottom of position page styling*/
+
+.reviews{
+  border: 1px solid RGB(130,130,130);
+  grid-column: 1 / span 3;
+}

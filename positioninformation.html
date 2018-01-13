@@ -12,4 +12,24 @@
 	<article class="full-width" id="positionblurb">
 		<p>{{position.blurb}}</p>
 	</article>
-{% include footer.html %}
+	<hr>
+	<!-- review section start here -->
+	<article class = "full-width">
+	<h2>Reviews </h2>
+</article>
+<hr>
+{% for section in review %}
+	{% if section.position_id == position.id %}
+<article class="full-width">
+	<h3>{{user[section.person_id].fname + " " + user[section.person_id].lname}}</h3>
+	<p class="reviews">{{section.content}}</p>
+  </article>
+	{% end if %}
+	{% end for %}
+
+</main>
+<footer>
+	<h5>footer</h5>
+</footer>
+	</body>
+</html>
