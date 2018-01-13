@@ -24,4 +24,8 @@ print(return_all_positions('./seekers_personal.db'))
 
 print(get_seekers('./seekers_personal.db')[0])
 
+var = get_seeker('./seekers_personal.db', 1)
+var.add_review('./seekers_personal.db', "0/5", "terrible")
+print(get_review('./seekers_personal.db', 1))
+
 ##
