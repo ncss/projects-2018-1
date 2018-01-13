@@ -33,6 +33,13 @@ function submitForm() {
 
    <script>
    searchbutton.onclick = submitForm;
+   searchbar.onkeypress = function(ev){
+     if(ev.key == 'Enter'){
+       submitForm()
+     }
+
+
+   }
    </script>
     </body>
    </html>
