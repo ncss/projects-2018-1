@@ -1,7 +1,11 @@
 from templating.nodes import *
 
 from templating.Syntax import render_profiles
-render = render_profiles
+
+def render(request, filename, context=None):
+    if context is None:
+        context = {}
+    request.write(render_profiles(filename, context))
 # "def render(originString, context):
 #     mode = "string"
 #     string = ""
