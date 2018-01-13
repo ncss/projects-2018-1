@@ -47,7 +47,7 @@ def map_handler(request):
 
 # Handler to display the form
 def profile_creator_handler(request):
-    with open('profile_creator.html') as i:
+    with open('createprofile.html') as i:
         profile_creator_html = i.read()
         request.write(profile_creator_html) # TEMPORARY STAND IN HTML AND CSS FILE
 
