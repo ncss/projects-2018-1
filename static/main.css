@@ -189,3 +189,16 @@ li{
 #mapdiv{
   background-image: url("mapimage.jpg");
 }
+/*styling creator profile*/
+#create-profile{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+#create-profile label, #create-profile input {
+  display: block;
+}
