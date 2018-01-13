@@ -5,6 +5,5 @@ regexes = {
     'endif': r'{%\s*end\s+if\s*%}',
     'for': r'{%\s*for\s+(.+)\s+in\s+(.+)\s*%}',
     'endfor': r'{%\s*end\s+for\s*%}',
-    #'unary': r'{%(.+)%}',
-    'expr': r'{{\s*(.+)\s*}}'
+    'expr': r'{{\s*(.+)\s*}}',
 }
