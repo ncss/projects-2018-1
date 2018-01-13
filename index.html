@@ -1,30 +1,4 @@
-<!-- Temporary File -->
-<!DOCTYPE html>
-<html>
-<head>
-  <link href="/static/main.css" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Home Page</title>
-</head>
-
-<body>
-  <header>
-    <nav>
-      <h1 class="logo">websitename/logo</h1>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/profile/1/">Profile</a></li>
-        <li><a href="/map/">Map</a></li>
-      </ul>
-
-      <ul class ="logins">
-        <li>James</li>
-        <li>Logout</li>
-      </ul>
-    </nav>
-  </header>
-    <main>
+{% include header.html %}
 
         <img id="indeximage" src="static\indeximage.jpg">
 
@@ -47,10 +21,4 @@
 
         <p>Hammock normcore sriracha, subway tile schlitz ennui hot chicken edison bulb af. Semiotics franzen drinking vinegar, flannel keffiyeh fanny pack shaman tilde. Scenester meh iPhone neutra pinterest woke. Flannel cronut raclette, fixie echo park whatever hot chicken man braid letterpress dreamcatcher single-origin coffee typewriter kickstarter kogi locavore.</p>
       </article>
-    </main>
-    <footer>
-    	<h5>footer</h5>
-    </footer>
-</body>
-
-</html>
+{% include footer.html %}
