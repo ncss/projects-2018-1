@@ -17,15 +17,20 @@ function submitForm() {
           <option value="workexperience">Work experience</option>
       </select>
       <button id="searchbutton" name="searchbutton">Search</button>
-     {% for item in position %}
-     <img id="positionimage" src="/static/computer.jpg">
-     <article class="right-two">
-       <h2><a href="/position/{{item.id}}/">{{item.positionname}}</a> </h2>
-       <h3>{{item.positiontype}} at {{item.companyname}}</h3>
-       <p>{{item.blurb[:100]}}...</p>
-     </article>
-     <hr>
-     {% end for %}
+      {% if position %}
+        {% for item in position %}
+       <img id="positionimage" src="/static/computer.jpg">
+       <article class="right-two">
+         <h2><a href="/position/{{item.id}}/">{{item.positionname}}</a> </h2>
+         <h3>{{item.positiontype}} at {{item.companyname}}</h3>
+         <p>{{item.blurb[:100]}}...</p>
+       </article>
+       <hr>
+       {% end for %}
+      {% end if %}
+      {% if not position %}
+        <p>No results found</p>
+      {% end if %}
    </main>
    <footer>
     <h5>footer</h5>
