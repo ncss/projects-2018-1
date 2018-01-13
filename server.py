@@ -37,9 +37,6 @@ def searchresult_handler(request, query, querytype):
             results.append(position)
     render(request, "positionlist.html", {"position": results})
 
-def about_handler(request):
-    request.write("Page Under Construction")
-
 def positionlist_handler(request):
     positionlist = return_all_positions('./database/seekers_personal.db')
     render(request, "positionlist.html", {"position": positionlist, "login": check_logged_in(request)})
@@ -95,7 +92,7 @@ def finished_profile_handler(request):
     for f in profile_fields:
         field.append(request.get_field(f))
 
-    create_seeker(field)
+    user = create_seeker('./database/seekers_personal.db', field)
     request.set_secure_cookie('user_id', str(user.id))
     request.redirect('/')
 
@@ -105,7 +102,6 @@ def pagenotfound_handler(request):
 
 server = Server() # Create a server object
 server.register(r'/', index_handler)
-server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
 server.register(r'/searchresult/(.*)/(.+)/', searchresult_handler)
 server.register(r'/position/', positionlist_handler)
