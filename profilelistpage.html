@@ -3,7 +3,7 @@
 {% for people in seekers %}
   <div class = "profile-list-item">
     <a href="/profile/{{people.id}}/" class="profile-picture-list">
-      <img class = "profile-picture-list" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
+      <img class = "profile-picture-list" src="{{ people.gravatar() }}">
     </a>
   </div>
     <article class="right-two">
