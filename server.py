@@ -31,7 +31,10 @@ def profile_handler (request, user_id):
 
 def profilelistpage_handler(request):
     seekers = get_seekers('./database/seekers_personal.db')
-    render(request, 'profilelistpage.html', {"seekers": seekers, "login": check_logged_in(request)})
+    if not check_logged_in(request):
+        render(request, 'profilelistpage.html', {"seekers": seekers, "login": check_logged_in(request)})
+    else:
+        render(request, "profile.html", {"user": check_logged_in(request), "login": check_logged_in(request)})
 
 def searchresult_handler(request, query, querytype):
     positions = return_all_positions('./database/seekers_personal.db')
