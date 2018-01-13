@@ -63,6 +63,11 @@ def finished_profile_handler(request):
     create_seeker(field)
     request.redirect('/')
 
+def pagenotfound_handler(request):
+    with open('pagenotfound.html') as n:
+        pagenotfound_html = n.read()
+        request.write(pagenotfound_html) # TEMPORARY STAND IN HTML AND CSS FILE
+        
 server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
@@ -71,4 +76,5 @@ server.register(r'/positioninformation/(\d+)', position_handler) # Dynamic page 
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/map/', map_handler)
 server.register(r'/profilecreation/', profile_creator_handler, post = finished_profile_handler)
+server.register(r'/.*', pagenotfound_handler)
 server.run() # Runs Server
