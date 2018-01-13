@@ -5,7 +5,7 @@ from database.seeker import Seeker
 from database.seeker import create_seeker
 from database.seeker import get_seeker
 
-user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
+#user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
 
 def index_handler (request):
@@ -33,8 +33,6 @@ def profile_handler (request, user_id):
                 request.write(usernotfound_html)
 
 
-
-
 def about_handler(request):
     request.write("Page Under Construction")
 
@@ -56,7 +54,7 @@ def profile_creator_handler(request):
 # Handler for creating a new profile (for submiting the form, handle the returned post)
 def finished_profile_handler(request):
     #add username later
-    profile_fields = ['fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies', 'skills', 'experiences']
+    profile_fields = ['fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies', 'skills']
     field = []
 
     for f in profile_fields:

@@ -1,1 +1,8 @@
-<h1>Hello world</h1><h2>Hello {% for i in range(4) %}<p>{{i}}</p>{% end fr %}</h2>
+{% for i in range(10) %}
+  {% if i % 2 %}
+    isOdd:{{i}}
+  {% end if %}
+  {% if i % 2 == 0 %}
+    isEven:{{i}}
+  {% end if %}
+{% end for %}

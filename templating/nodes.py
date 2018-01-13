@@ -69,7 +69,7 @@ class IfNode(Node):
         self.child = child
 
     def evaluate(self, context):
-        if eval(self.condition):
+        if eval(self.condition, {}, context):
             return self.child.evaluate(context)
         else:
             return ""

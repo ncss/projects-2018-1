@@ -2,8 +2,8 @@ import re
 import sys
 from templating.nodes import *
 from templating.regex import *
-#from nodes import *
-#from regex import *
+# from .nodes import *
+# from .regex import *
 
 class TemplateTree:
     def __init__(self,template):
@@ -53,7 +53,8 @@ class TemplateTree:
                 if endNode:
                     if endNode == 'for' and regex == 'endfor':
                         return tree
-                    # TODO if
+                    if endNode == 'if' and regex == 'endif':
+                        return tree
                 if regex == 'include':
                     filename = match.group(2)
                     with open(filename) as f:
@@ -62,17 +63,17 @@ class TemplateTree:
                 elif regex == 'expr':
                     tree.addChild(PythonNode(match.group(1)))
                 elif regex == 'for':
-                    print(match.groups())
                     tree.addChild(ForNode(match.group(1), match.group(2), self.generateTree('for')))
+                elif regex == 'if':
+                    tree.addChild(IfNode(match.group(1), self.generateTree('if')))
         return tree
 
 
 def render_profiles(template, context):
     tree = TemplateTree(template).generateTree()
-    print(tree)
     return tree.evaluate(context)
 
 if __name__ == "__main__":
     with open('sample.html') as f:
         f = f.read()
-        render_profiles(f, {})
+        print(render_profiles(f, {}))
