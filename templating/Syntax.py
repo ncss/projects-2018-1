@@ -1,15 +1,18 @@
 import re
 import sys
-from templating.nodes import *
-from templating.regex import *
-# from .nodes import *
-# from .regex import *
+# from templating.nodes import *
+# from templating.regex import *
+from .nodes import *
+from .regex import *
+
+class TemplateSyntaxError(BaseException):
+    pass
 
 class TemplateTree:
-    def __init__(self,template):
-        self.template = template
+    def __init__(self, template):
+        self.template = re.sub(r'{#.*?#}', '', template, flags=re.S)
 
-    def generateTree(self,endNode = None):
+    def generateTree(self, endNode = None):
         tree = GroupNode()
         nodeType = "string"
         index = 0
@@ -49,12 +52,19 @@ class TemplateTree:
                     if match:
                         break
                 else:
-                    continue
-                if endNode:
-                    if endNode == 'for' and regex == 'endfor':
+                    raise TemplateSyntaxError('Unknown tag: {}'.format(nodeContent))
+                if endNode == 'for':
+                    if regex == 'endfor':
                         return tree
-                    if endNode == 'if' and regex == 'endif':
+                    elif regex == 'endif':
+                        raise TemplateSyntaxError('Wrong closing tag. Expected for, got if.')
+                if endNode == 'if':
+                    if regex == 'endif':
                         return tree
+                    elif regex == 'endfor':
+                        raise TemplateSyntaxError('Wrong closing tag. Expected if, got for.')
+                if (regex == 'endif' or regex =='endfor') and endNode is None:
+                    raise TemplateSyntaxError('Attempted to close an unopened tag ({}).'.format(regex))
                 if regex == 'include':
                     filename = match.group(2)
                     with open(filename) as f:
@@ -66,14 +76,11 @@ class TemplateTree:
                     tree.addChild(ForNode(match.group(1), match.group(2), self.generateTree('for')))
                 elif regex == 'if':
                     tree.addChild(IfNode(match.group(1), self.generateTree('if')))
+        if endNode:
+            raise TemplateSyntaxError('Missing closing tag: {}'.format(endNode))
         return tree
 
 
 def render_profiles(template, context):
     tree = TemplateTree(template).generateTree()
     return tree.evaluate(context)
-
-if __name__ == "__main__":
-    with open('sample.html') as f:
-        f = f.read()
-        print(render_profiles(f, {}))
