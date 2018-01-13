@@ -45,9 +45,10 @@ def positionlist_handler(request):
     render(request, "positionlist.html", {"position": positionlist})
 
 def position_handler(request, page_id):
-    position_information = get_position(page_id)
-    review_information = get_review_by_position(page_id)
-    render(request, "positioninformation.html", {'position': position_information, 'review': review_information})
+    position_information = get_position('./database/seekers_personal.db',page_id)
+    position_review = get_review_by_position('./database/seekers_personal.db', page_id)
+    review_information = get_review_by_position('./database/seekers_personal.db', page_id)
+    render(request, "positioninformation.html", {'position': position_information, 'review': position_review})
 
 def map_handler(request):
     request.write("Page Under Construction")

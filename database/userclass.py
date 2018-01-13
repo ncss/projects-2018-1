@@ -24,7 +24,7 @@ print(return_all_positions('./seekers_personal.db'))
 
 print(get_seekers('./seekers_personal.db')[0])
 
-user = get_seeker(1)
+user = get_seeker('./seekers_personal.db',1)
 user.add_review('./seekers_personal.db', "5/5", "awesome", 1)
 user.add_review('./seekers_personal.db', "3/5", "ok", 1)
 user.add_review('./seekers_personal.db', "1/5", "terrible", 1)

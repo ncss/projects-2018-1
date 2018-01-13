@@ -1,5 +1,5 @@
 import sqlite3
-from .position import *
+from database.position import *
 
 class Review(object):
     def __init__(self, rating, content, person_id, position_id, id=None):
@@ -13,7 +13,7 @@ class Review(object):
         return "id: {}, rating: {}, content: {}, person_id: {}, position_id: {}".format(self.id, self.rating, self.content, self.person_id, self.position_id)
 
 
-    def save(db_file, self):
+    def save(self, db_file):
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
         cur.execute("""INSERT INTO reviews (rating, content, person_id, position_id)
@@ -45,10 +45,10 @@ class Seeker(object):
 
         return "fname: '{}', lname: '{}', birthdate: '{}', phone: '{}', email: '{}', city: '{}', eductaion: '{}', hobbies: '{}', skills: '{}', id: '{}', reviews: '{}', username: '{}', password: '{}', bio: '{}'".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.id, self.reviews, self.username, self.password, self.bio)
 
-    def add_review(self,rating, content, position_id):
+    def add_review(self, db_file, rating, content, position_id):
 
         rev = Review(rating, content, self.id, position_id)
-        rev.save()
+        rev.save(db_file)
         self.reviews.append(rev.id)
 
 #Find the seeker with specific id and return information
@@ -115,8 +115,8 @@ def get_seekers(db_file):
 
     return info
 
-def get_review_by_position(position_id):
-    conn = sqlite3.connect('./seekers_personal.db')
+def get_review_by_position(db_name, position_id):
+    conn = sqlite3.connect(db_name)
     cur = conn.cursor()
     cur.execute("SELECT * FROM reviews WHERE position_id=?;",(position_id,))
 
