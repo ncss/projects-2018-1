@@ -2,15 +2,24 @@
   .chat {
     position: fixed;
     bottom: 0;
+    z-index: 1000;
     right: 2rem;
     width: 16rem;
     height: 22rem;
     background-color: #EEEEEE;
 
-    border: 2px solid #BDBDBD;
+    border: 2px solid rgb(51, 51, 51);
+    /* rgb(198, 156, 109); */
     border-bottom: none;
     font-family: 'Arial';
     border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .chat.hidden {
+    bottom: -20.5rem;
+
   }
 
   .heading {
@@ -19,8 +28,9 @@
     color: white;
     height: 1.5rem;
     line-height: 1.5rem;
-    background-color: #BDBDBD;
+    background-color: rgb(51, 51, 51);
     position: relative;
+    cursor: pointer;
   }
 
   i.indicator {
@@ -42,6 +52,7 @@
     width: 100%;
     background-color: #EFEFEF
     padding: 0.25rem;
+    border-top: 1px solid rgb(198, 156, 109);
   }
 
   input {
@@ -61,43 +72,81 @@
   .messages {
     overflow-y: scroll;
     padding: 1rem;
+    margin-bottom: 2rem;
+    max-height: 16.5rem;
   }
 
   .message {
-    background-color: #4DD0E1;
+    background-color: #B2DFDB;
     padding: 0.25rem;
     border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
+    text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
+  .message.server {
+    background-color: rgba(198, 156, 109, 0.2);
+    text-align: left;
   }
 </style>
 
-<script>
 
-
-
-  function send_message(){
-
-  }
-
-</script>
-
-<div class="chat">
-  <div class="heading">Chatbot
+<div class="chat hidden" id="chatbot">
+  <div class="heading" id="chatHeading">Bec
 
     <i class="indicator"></i>
 
   </div>
 
-  <div class="messages">
+  <div class="messages" id="messages">
 
-    <div class="message">
-      Hello
-    </div>
+
+
   </div>
-
-  <form>
+  <form id="chatForm">
     <div class="input">
-      <input type="text">
+      <input type="text" placeholder="Message" id="chatbotInput">
     </div>
   </form>
 </div>
+
+<script>
+
+  window.ws = new WebSocket("ws://localhost:8888/ws/");
+  ws.onmessage = (message) => {
+    window.lastMessage = message;
+    let messageLM = document.createElement("div");
+    messageLM.textContent = message.data;
+    messageLM.classList.add("message", "server");
+
+    messages.appendChild(messageLM)
+    messageLM.scrollIntoView(true);
+    updateScroll()
+  }
+
+  function send_message(theMessage){
+    ws.send(theMessage);
+  }
+
+  chatHeading.onclick = (ev) => {
+    chatbot.classList.toggle('hidden');
+
+  }
+
+  chatForm.onsubmit = (ev) => {
+    ev.preventDefault();
+    send_message(chatbotInput.value);
+
+    let messageLM = document.createElement("div");
+    messageLM.textContent = chatbotInput.value;
+    messageLM.classList.add("message");
+
+    chatbotInput.value = "";
+    messages.appendChild(messageLM);
+    messageLM.scrollIntoView(true);
+
+updateScroll()
+  }
+</script>
