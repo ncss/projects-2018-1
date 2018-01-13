@@ -14,25 +14,25 @@
 		 <h4>Skills:</h4>
 		 <ul>
 	         {% for item in user.skills.split(',') %}
-	            <li>{{item}}</li>
+					 		{% if item.strip()%}
+									<li>{{item}}</li>
+							{% end if %}
 	         {% end for %}
 		 </ul>
 		 <h4>Education:</h4>
 		 <ul>
 					 {% for item in user.education.split(',') %}
-							<li>{{item}}</li>
+							 {% if item.strip()%}
+									 <li>{{item}}</li>
+							 {% end if %}
 					 {% end for %}
-		 </ul>
-		 <h4>Experiences:</h4>
-		 <ul>
-	         {% for item in user.experiences %}
-	            <li>{{item}}</li>
-	         {% end for %}
 		 </ul>
 		 <h4>Hobbies:</h4>
 		 <ul>
 	         {% for item in user.hobbies.split(',') %}
-	            <li>{{item}}</li>
+							 {% if item.strip()%}
+									 <li>{{item}}</li>
+							 {% end if %}
 	         {% end for %}
 		 </ul>
 		 <h4>Bio:</h4>

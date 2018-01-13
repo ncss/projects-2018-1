@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 
 class Experience(object):
     def __init__(self, companyname, experiencetype, rating, person_id):
@@ -46,6 +47,11 @@ class Seeker(object):
         exp.save()
         self.experiences.append(exp.id)
 
+    def gravatar(self):
+        h = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon'.format(h)
+
+
 #Find the seeker with specific id and return information
 def get_seeker(db_file, id):
     """Returns information about a seeker from the database."""
@@ -57,7 +63,7 @@ def get_seeker(db_file, id):
     cur.close()
     conn.close()
     if row == None:
-        return None 
+        return None
     id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
     return user
@@ -78,6 +84,7 @@ def create_seeker(db_file, info):
     conn.commit()
     cur.close()
     conn.close()
+    return user
 
 def get_experience(db_file, id):
     """Returns information about an experience from the database."""
@@ -110,8 +117,23 @@ def get_seekers(db_file):
 
     return info
 
+def get_seeker_by_username(db_file, username):
+    """Returns information about a seeker from the database."""
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM seekers_personal WHERE username = ?;",(username,))
+    row = cur.fetchone()
+    conn.commit()
+    cur.close()
+    conn.close()
+    if row == None:
+        return None
+    id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
+    user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
+    return user
+
 #cur.close()
 #conn.close()
-#create DB call in sepereate files (createdatabse file)
+#create DB call in sepereate files (create databse file)
 # class function to create user (INSERT INTO etc.)
 # class function to get user from db

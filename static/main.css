@@ -251,6 +251,11 @@ li{
 .profile-list-item{
   display: grid;
 }
+
+.list-item {
+  width: 100%;
+  display: block;
+}
 /*position information page styling*/
 #positionimage{
   grid-column: 1 / span 1;
