@@ -7,6 +7,7 @@ class Company:
         self.languages = None
         self.formality = None
         self.size = None
+        self.locations = None
 
     def populate(self, json):
         self.name = json['name']
@@ -14,6 +15,7 @@ class Company:
         self.languages = json['languages']
         self.formality = json['formality']
         self.size = json['size']
+        self.locations = json['locations']
 
     def __str__(self):
         return self.name
