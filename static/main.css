@@ -5,10 +5,15 @@ html{
 }
 
 body{
-
   font-family: 'Open Sans', sans-serif;
   margin: 0;
+}
 
+a, a:link {
+  color: RGB(198,156,109);
+}
+a:active {
+  color: RGB(160,82,45);
 }
 
 header {
@@ -19,13 +24,12 @@ header {
   border-bottom: 5px solid RGB(198,156,109);
 }
 
-
 h1{
   color: RGB(198,156,109);
   font-weight: 300;
   font-size: 50px;
   font-family: 'Source Sans Pro';
-  margin: 20px 0;
+  margin: 20px 0 20px 0;
 }
 
 h2{
@@ -34,6 +38,38 @@ h2{
   font-size: 30px;
   font-family: 'Source Sans Pro';
   margin: 20px 0;
+}
+
+h3{
+  font-weight: 200;
+  font-size: 20px;
+  font-family: 'Source Sans Pro';
+  color: RGB(149,149,149);
+
+}
+
+h4{
+
+}
+
+article{
+  background-color: RGB(255,255,255);
+  padding: 20px ;
+}
+
+ul{
+  list-style: square;
+  padding-left: 20px;
+}
+
+ol{
+  padding-left: 20px;
+}
+
+hr{
+  border-color: RGB(198,156,109);
+  grid-column: 1 / span 3;
+  margin: 28px 0 28px 0;
 }
 
 
@@ -53,6 +89,15 @@ footer {
   text-align:center;
 }
 
+footer>h4{
+  width: 60%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: inline;
+  font-size: 15px;
+  font-weight: 100;
+  font-family: 'Source Sans Pro';
+}
 
 header>nav>ul{
   list-style: none;
