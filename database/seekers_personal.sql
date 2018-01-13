@@ -6,7 +6,10 @@ CREATE TABLE seekers_personal (
     phone TEXT NOT NULL,
     email TEXT NOT NULL,
     city TEXT NOT NULL,
-    education TEXT NOT NULL,
-    hobbies TEXT NOT NULL,
-    skills TEXT NOT NULL
+    education TEXT,
+    hobbies TEXT,
+    skills TEXT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    bio TEXT NOT NULL
 );
