@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+{% include header.html %}
 
-<html>
-<body>
-<p>hi</p>
+{% for people in seekers %}
 
-</body>
+<div class = "profile-list-item">
+<img class = "profile-picture-list" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
+</div>
+<article class="right-two">
+<h2>{{people.fname + ' ' + people.lname}}</h2>
+</article>
+<hr>
+{% end for %}
 
 
-
-
-
-
-
-
-</html>
+{% include footer.html %}

@@ -19,13 +19,16 @@ class TemplateTree:
         currentNode = None
         while self.template != "":
             # determine nodeType of currentNode
-            if self.template[0] == "{":
+            if self.template[0] == "{" and self.template[1] in "%{":
                 nodeType = "template"
             else:
                 nodeType = "string"
             # extract current  node
             if nodeType == "string":
                 nodeContent = ""
+                if self.template[0] == "{":
+                    nodeContent += self.template[0]
+                    self.template = self.template[1:]
                 # if current node is a text node
                 while len(self.template) and self.template[0] != "{" :
                     nodeContent += self.template[0]

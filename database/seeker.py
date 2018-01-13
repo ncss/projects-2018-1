@@ -60,9 +60,13 @@ def get_seeker(id):
     conn.commit()
     cur.close()
     conn.close()
+    if row == None:
+        return None 
     id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
     return user
+
+
 
 def create_seeker(info):
     """Creates a new seeker."""

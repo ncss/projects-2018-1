@@ -127,9 +127,10 @@ nav{
 
 li{
   margin: 10px;
-
 }
-
+.left-two{
+  grid-column: 1 / span 2;
+}
 
 .logins{
   text-align: right;
@@ -191,6 +192,7 @@ li{
 }
 /*styling creator profile*/
 #create-profile{
+  margin: 0 10% 0 10%;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-column-gap: 24px;
@@ -199,6 +201,64 @@ li{
   justify-items: stretch;
 }
 
-#create-profile label, #create-profile input {
-  display: block;
+#create-profile label {
+  text-align:right;
+  align-self: center;
+}
+
+#create-profile input, #create-profile textarea {
+  padding: 8px;
+  border: 1px solid RGB(200,200,200);
+  border-radius: 2px;
+}
+#create-profile [type="submit"]{
+  grid-column: 2;
+  background: RGB(198,156,109);
+  border: none;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/*profile list page styling*/
+.profile-picture-list{
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  justify-self: center;
+}
+
+.profile-list-item{
+  display: grid;
+/*position information page styling*/
+#positionimage{
+  grid-column: 1 / span 1;
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+#positionblurb{
+  grid-column: 1 / span 3;
+}
+/*position page styling*/
+#searchbar{
+  margin: 20px;
+  margin-right: none;
+  height: 30px;
+  width: 500px;
+  font-size: 28px;
+}
+#searchbutton{
+  margin: 20px;
+  margin-left: none;
+  height: 35px;
+  width: 100px;
+  font-size: 20px;
+}
+#typeschoice{
+  margin: 20px;
+  margin-left: none;
+  height: 35px;
+  width: 200px;
+  font-size: 20px;
 }
