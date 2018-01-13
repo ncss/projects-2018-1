@@ -27,6 +27,7 @@ conn.close()
 class Seeker(object):
     """Person searching for work experience."""
     def __init__(self, fname, lname, birthdate, phone, email, city, education, hobbies, skills, experiences):
+        self.id = None
         self.fname = fname
         self.lname = lname
         self.birth_date = birthdate
@@ -37,19 +38,6 @@ class Seeker(object):
         self.hobbies = hobbies
         self.skills = skills
         self.experiences = experiences
-
-    def upload_seeker(self,id):
-        """Stores seeker information in the database"""
-        conn = sqlite3.connect('seekers_personal.db')
-        cur = conn.cursor()
-        #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-        #            VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
-        cur.execute("""INSERT INTO seekers_personal (fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-                    VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
-
-        conn.commit()
-        cur.close()
-        conn.close()
 
 
 #Find the seeker with specific id and return information
@@ -70,8 +58,16 @@ def create_seeker(info):
     """Creates a new seeker."""
     fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences = info
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
-    user.upload_seeker(id)
+    conn = sqlite3.connect('seekers_personal.db')
+    cur = conn.cursor()
+    #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+    #            VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
+    cur.execute("""INSERT INTO seekers_personal (fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
+                VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences))
 
+    conn.commit()
+    cur.close()
+    conn.close()
 
 
 #cur.close()
