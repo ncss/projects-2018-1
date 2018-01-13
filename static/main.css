@@ -149,9 +149,7 @@ li{
   align-self: center;
   justify-self: center;
 }
-article{
-  grid-column: 1 / span 3;
-}
+
 /*index page styling*/
 #indeximage{
   grid-column: 1 / span 2;
@@ -167,7 +165,6 @@ article{
   text-align: center;
   height: 300px;
   margin: 2px;
-  margin-top: 20px;
   padding: auto;
   display: grid;
 
