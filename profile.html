@@ -17,6 +17,12 @@
 	            <li>{{item}}</li>
 	         {% end for %}
 		 </ul>
+		 <h4>Education:</h4>
+		 <ul>
+					 {% for item in user.education.split(',') %}
+							<li>{{item}}</li>
+					 {% end for %}
+		 </ul>
 		 <h4>Experiences:</h4>
 		 <ul>
 	         {% for item in user.experiences %}
