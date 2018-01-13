@@ -1,6 +1,6 @@
 {% include header.html %}
 		 <div id= "profile">
-		 <img id="profile-picture" src="https://static.groklearning-cdn.com/static/images/marketing/about/james-2017-07@2x.png">
+		 <img id="profile-picture" src="{{ user.gravatar() }}">
 	 </div>
 		<article class="right-two">
 		 <h1>{{user.fname + ' ' + user.lname}}</h1>
