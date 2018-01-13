@@ -4,6 +4,7 @@ cur = conn.cursor()
 
 cur.executescript(open('database/seekers_personal.sql', 'rU').read())
 cur.executescript(open('database/experience.sql', 'rU').read())
+cur.executescript(open('database/position.sql', 'rU').read())
 conn.commit()
 cur.close()
 conn.close()
