@@ -2,7 +2,7 @@
 from templating import render
 from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
 from database.seeker import Seeker
-
+from database.seeker import create_seeker
 
 user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
@@ -43,13 +43,14 @@ def profile_creator_handler(request):
 
 # Handler for creating a new profile (for submiting the form, handle the returned post)
 def finished_profile_handler(request):
-    profile_fields = ['username', 'fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies']
+    #add username later
+    profile_fields = ['fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies', 'skills', 'experiences']
     field = []
 
     for f in profile_fields:
         field.append(request.get_field(f))
 
-    print(','.join(field))
+    create_seeker(field)
     request.redirect('/')
 
 server = Server() # Create a server object
