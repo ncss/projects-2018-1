@@ -14,10 +14,10 @@ class Position(object):
 
         return "positionname: '{}', companyname: '{}', positionlength: '{}', positiontype: '{}', address: '{}', companyurl: '{}', blurb: '{}'".format(self.positionname,self.companyname, self.positionlength, self.positiontype, self.address, self.companyurl, self.blurb)
 
-def create_position(positioninfo):
+def create_position(db_file, positioninfo):
     positionname, companyname, positionlength, positiontype, address, companyurl, blurb = positioninfo
     finalposition = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
-    conn = sqlite3.connect('./seekers_personal.db')
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
     #            VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')""".format(self.id, self.fname, self.lname, self.birth_date, self.phone, self.email, self.city, self.education, self.hobbies, self.skills, self.experiences))
@@ -28,8 +28,8 @@ def create_position(positioninfo):
     cur.close()
     conn.close()
 
-def get_position(id):
-    conn = sqlite3.connect('./seekers_personal.db')
+def get_position(db_file, id):
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM position WHERE id = ?;",(id,))
     row = cur.fetchone()
@@ -40,8 +40,8 @@ def get_position(id):
     finalposition = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
     return finalposition
 
-def return_all_positions():
-    conn = sqlite3.connect('./seekers_personal.db')
+def return_all_positions(db_file):
+    conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     cur.execute("SELECT * FROM position;")
 
