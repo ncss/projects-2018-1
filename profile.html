@@ -33,10 +33,10 @@
 	<hr>
 
 	<article class="full-width">
-			<h4>Professional Interests:</h4> <p style="font-size: 85%;">{{', '.join(user.hobbies)}}</p>
+		 <!--<h4>Professional Interests:</h4> <p style="font-size: 85%;">{{', '.join(user.hobbies)}}</p>-->
 		 <h4>Skills:</h4>
 		 <ul>
-	         {% for item in user.skills %}
+	         {% for item in user.skills.split(',') %}
 	            <li>{{item}}</li>
 	         {% end for %}
 		 </ul>
@@ -48,7 +48,7 @@
 		 </ul>
 		 <h4>Hobbies:</h4>
 		 <ul>
-	         {% for item in user.hobbies %}
+	         {% for item in user.hobbies.split(',') %}
 	            <li>{{item}}</li>
 	         {% end for %}
 		 </ul>

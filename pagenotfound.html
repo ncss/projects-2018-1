@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>404: Page Not Found</title>
-</head>
-<style>
-li {
-  display: inline;
-  padding-right: 5px;
-}
-</style>
-<body>
-
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/profile/1/">Profile</a></li>
-    <li><a href="/map/">Map</a></li>
-  </ul>
-  <h1>404: Page Not Found.</h1>
-</body>
-
-</html>
+{% include header.html %}
+     <article class="full-width">
+     <h1>Page not found</h1>
+     <h2>Maybe try the links at the top of the page</h2>
+     <h3>ERROR: 404</h3>
+   </article>
+{% include footer.html %}
