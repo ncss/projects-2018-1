@@ -4,7 +4,7 @@ from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The 
 from database.seeker import Seeker
 
 
-user = Seeker(1,"James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
+user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
 
 def index_handler (request):
@@ -38,13 +38,18 @@ def map_handler(request):
 # Handler to display the form
 def profile_creator_handler(request):
     with open('profile_creator.html') as i:
-        ESP_html = i.read()
-        request.write(ESP_html) # TEMPORARY STAND IN HTML AND CSS FILE
+        profile_creator_html = i.read()
+        request.write(profile_creator_html) # TEMPORARY STAND IN HTML AND CSS FILE
 
 # Handler for creating a new profile (for submiting the form, handle the returned post)
 def finished_profile_handler(request):
-    variable = request.get_field("username")
-    print(variable)
+    profile_fields = ['username', 'fname', 'lname', 'birthdate', 'phone', 'email', 'city', 'education', 'hobbies']
+    field = []
+
+    for f in profile_fields:
+        field.append(request.get_field(f))
+
+    print(','.join(field))
     request.redirect('/')
 
 server = Server() # Create a server object
