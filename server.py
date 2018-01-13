@@ -33,9 +33,9 @@ def searchresult_handler(request, query, querytype):
     positions = return_all_positions('./database/seekers_personal.db')
     results = []
     for position in positions:
-        if (query.lower() in position.positionname.lower() or query.lower() in position.companyname.lower() or query.lower() in position.positionlength.lower() or query.lower() in position.address.lower()) and querytype.lower() in position.positiontype.lower():
+        if (query.lower() in position.positionname.lower() or query.lower() in position.companyname.lower() or query.lower() in position.positionlength.lower() or query.lower() in position.address.lower()) and (querytype.lower() in position.positiontype.lower() or querytype.lower() == 'alltypes'):
             results.append(position)
-    render(request, "positionlist.html", {"position": results})
+    render(request, "positionlist.html", {"position": results, "login": check_logged_in(request)})
 
 def positionlist_handler(request):
     positionlist = return_all_positions('./database/seekers_personal.db')
