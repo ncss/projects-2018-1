@@ -93,6 +93,7 @@ def finished_profile_handler(request):
         field.append(request.get_field(f))
 
     create_seeker(field)
+    request.set_secure_cookie('user_id', str(user.id))
     request.redirect('/')
 
 def pagenotfound_handler(request):
