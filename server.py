@@ -29,8 +29,13 @@ def profilelistpage_handler(request):
     seekers = get_seekers('./database/seekers_personal.db')
     render(request, 'profilelistpage.html', {"seekers": seekers})
 
-def searchresult_handler(request):
-    request.write("Page Under Construction")
+def searchresult_handler(request, query, querytype):
+    positions = return_all_positions('./database/seekers_personal.db')
+    results = []
+    for position in positions:
+        if (query.lower() in position.positionname.lower() or query.lower() in position.companyname.lower() or query.lower() in position.positionlength.lower() or query.lower() in position.address.lower()) and querytype.lower() in position.positiontype.lower():
+            results.append(position)
+    render(request, "positionlist.html", {"position": results})
 
 def about_handler(request):
     request.write("Page Under Construction")
@@ -76,7 +81,7 @@ server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
-server.register(r'/searchresult/', searchresult_handler)
+server.register(r'/searchresult/(.*)/(.+)/', searchresult_handler)
 server.register(r'/position/', positionlist_handler)
 server.register(r'/position/(\d+)/', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
