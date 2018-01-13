@@ -28,6 +28,9 @@ def profile_handler (request, user_id):
 def about_handler(request):
     request.write("Page Under Construction")
 
+def profilelistpage_handler(request):
+    render(request, 'profilelistpage.html')
+
 def searchresult_handler(request):
     request.write("Page Under Construction")
 
@@ -39,9 +42,7 @@ def map_handler(request):
 
 # Handler to display the form
 def profile_creator_handler(request):
-    with open('createprofile.html') as i:
-        profile_creator_html = i.read()
-        request.write(profile_creator_html) # TEMPORARY STAND IN HTML AND CSS FILE
+    render(request, 'createprofile.html')
 
 # Handler for creating a new profile (for submiting the form, handle the returned post)
 def finished_profile_handler(request):
@@ -56,13 +57,13 @@ def finished_profile_handler(request):
     request.redirect('/')
 
 def pagenotfound_handler(request):
-    with open('pagenotfound.html') as n:
-        pagenotfound_html = n.read()
-        request.write(pagenotfound_html) # TEMPORARY STAND IN HTML AND CSS FILE
+    render(request, 'pagenotfound.html')
+
 
 server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
+server.register(r'/profilelistpage/',profilelistpage_handler)
 server.register(r'/searchresult/', searchresult_handler)
 server.register(r'/positioninformation/(\d+)', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
