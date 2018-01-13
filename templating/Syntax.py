@@ -2,33 +2,8 @@ import re
 import sys
 from templating.nodes import *
 from templating.regex import *
-
-def isValidTemplate(template):
-  toconcat = []
-  matches = []
-  x = False
-  for line in template:
-     toconcat.append(line.strip())
-  tree = "".join(toconcat)
-  for char in tree:
-    if x == True and char != "}":
-      s += char
-    if char == "}":
-      matches.append(s)
-      x = False
-    if char == "{":
-      s = ''
-      x = True
-  # finished scanning all characters
-  # if x is still true, then an ending curly brace hasn't ended
-  if x == True:
-    raise TypeError
-
-  for item in matches:
-    for regex in regexes:
-      if bool(re.match(regexes[regex],item)) == False:
-        raise TypeError
-  return True
+#from nodes import *
+#from regex import *
 
 def generateTree(template, endNode = None):
     tree = GroupNode()
@@ -69,6 +44,12 @@ def generateTree(template, endNode = None):
                 match = re.search(regexes[regex], nodeContent)
                 if match:
                     break
+            else:
+                continue
+            if endNode:
+                if endNode == 'for' and regex == 'endFor':
+                    return tree
+                # TODO if
             if regex == 'include':
                 filename = match.group(2)
                 with open(filename) as f:
@@ -76,22 +57,11 @@ def generateTree(template, endNode = None):
                     tree.addChild(generateTree(f))
             elif regex == 'expr':
                 tree.addChild(PythonNode(match.group(1)))
-            else:
-                raise TypeError
+            elif regex == 'for':
+                print(match.groups())
+                tree.addChild(ForNode(match.group(1), match.group(2), generateTree(template, 'for')))
     return tree
 
-
-
-
-def render_profiles(context, file):
-  try:
-    with open(file) as f:
-      f = f.read()
-      tree = generateTree(f)
-      print(tree.evaluate(context))
-  except TypeError as e:
-    #ncssbook_log.exception(e)
-    return False
-  else:
-    #tree.render(sys.stdout,context)
-    return True
+def render_profiles(template, context):
+    tree = generateTree(template)
+    return tree.evaluate(context)
