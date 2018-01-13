@@ -1,8 +1,8 @@
 import sqlite3
 
 class Position(object):
-    def __init__(self, positionname, companyname, positionlength, positiontype, address, companyurl, blurb):
-        self.id = None
+    def __init__(self, id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb):
+        self.id = id
         self.positionname = positionname
         self.companyname = companyname
         self.positionlength = positionlength
@@ -16,7 +16,7 @@ class Position(object):
 
 def create_position(db_file, positioninfo):
     positionname, companyname, positionlength, positiontype, address, companyurl, blurb = positioninfo
-    finalposition = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
+    finalposition = Position(None, positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     #print("""INSERT INTO seekers_personal (id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, experiences)
@@ -37,7 +37,7 @@ def get_position(db_file, id):
     cur.close()
     conn.close()
     id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb = row
-    finalposition = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
+    finalposition = Position(id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
     return finalposition
 
 def return_all_positions(db_file):
@@ -49,7 +49,7 @@ def return_all_positions(db_file):
 
     for row in cur:
         id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb = row
-        position = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
+        position = Position(id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
         allpositions.append(position)
 
     conn.commit()

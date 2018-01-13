@@ -20,7 +20,7 @@ function submitForm() {
      {% for item in position %}
      <img id="positionimage" src="/static/computer.jpg">
      <article class="right-two">
-       <h2><a href="/position/{{item.id}}">{{item.positionname}}</a> </h2>
+       <h2><a href="/position/{{item.id}}/">{{item.positionname}}</a> </h2>
        <h3>{{item.positiontype}} at {{item.companyname}}</h3>
        <p>{{item.blurb[:100]}}...</p>
      </article>
