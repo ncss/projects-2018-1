@@ -22,7 +22,7 @@
 	 </header>
 	 <main>
      <input id="searchbar" type="text" size="40" name="field_name" placeholder="Search"><button id="searchbutton" name="searchbutton">Search</button>
-     <!--{% for item in positions %}-->
+     {% for item in positions %}
      <img id="positionimage" src="static/computer.jpg">
      <article class="right-two">
        <h2><a href="/position/{{position.id}}">{{position.positionname}}</a> </h2>
@@ -30,7 +30,7 @@
        <p>{{position.blurb[:100]}}...</p>
      </article>
      <hr>
-     <!--{% end for %}-->
+     {}% end for %}
    </main>
    <footer>
     <h5>footer</h5>

@@ -37,7 +37,8 @@ def about_handler(request):
     request.write("Page Under Construction")
 
 def positionlist_handler(request):
-    render(request, "positionlist.html", {"position": position_id})
+    positionlist = return_all_fields()
+    render(request, "positionlist.html", {"position": positionlist})
 
 def position_handler(request, page_id):
     position_information = get_position(page_id)
@@ -76,8 +77,7 @@ server = Server() # Create a server object
 server.register(r'/', index_handler)
 server.register(r'/about/', about_handler)
 server.register(r'/profile/',profilelistpage_handler)
-server.register(r'/searchresult/', searchresult_handler)
-#server.register(r'/position/', positionlist_handler)
+server.register(r'/position/', positionlist_handler)
 server.register(r'/position/(\d+)/', position_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/profile/(\d+)/', profile_handler) # Dynamic page | takes in a user id which is used
 server.register(r'/map/', map_handler)
