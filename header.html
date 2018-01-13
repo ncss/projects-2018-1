@@ -18,8 +18,15 @@
       </ul>
 
       <ul class ="logins">
-        <li>James</li>
-        <li>Logout</li>
+        {% if login %}
+        <li>{{login.username}}</li>
+        <li><a href="/logout/">Logout</a></li>
+        {% end if %}
+
+        {% if not login %}
+        <li><a href="/login/">Login</a></li>
+        <li><a href="/profilecreation/">Sign Up</a></li>
+        {% end if %}
       </ul>
     </nav>
   </header>

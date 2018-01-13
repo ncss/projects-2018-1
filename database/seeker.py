@@ -57,7 +57,7 @@ def get_seeker(id):
     cur.close()
     conn.close()
     if row == None:
-        return None 
+        return None
     id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
     user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
     return user
@@ -109,6 +109,21 @@ def get_seekers():
     conn.close()
 
     return info
+
+def get_seeker_by_username(username):
+    """Returns information about a seeker from the database."""
+    conn = sqlite3.connect('./seekers_personal.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM seekers_personal WHERE username = ?;",(username,))
+    row = cur.fetchone()
+    conn.commit()
+    cur.close()
+    conn.close()
+    if row == None:
+        return None
+    id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
+    user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
+    return user
 
 #cur.close()
 #conn.close()
