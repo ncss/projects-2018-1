@@ -3,6 +3,7 @@ from templating import render
 from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The logs will be more legible and easyer to follow / understand
 from database.seeker import Seeker
 from database.seeker import create_seeker
+from database.seeker import get_seeker
 
 user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
@@ -13,15 +14,26 @@ def index_handler (request):
         request.write(index_html) # TEMPORARY STAND IN HTML AND CSS FILE
 
 def profile_handler (request, user_id):
+    '''
     if user_id == '1':
         with open('profile.html') as p:
             profile_html = p.read()
             profile_html = render(profile_html, {"user": user})
             request.write(profile_html)
-    else:
-        with open("usernotfound.html") as u:
-            usernotfound_html = u.read()
-            request.write(usernotfound_html)
+    '''
+    with open('profile.html') as p:
+        try:
+            profile_html = p.read()
+            customer = get_seeker(user_id)
+            profile_html = render(profile_html, {"user":customer})
+            request.write(profile_html)
+        except:
+            with open("usernotfound.html") as u:
+                usernotfound_html = u.read()
+                request.write(usernotfound_html)
+
+
+
 
 def about_handler(request):
     request.write("Page Under Construction")
