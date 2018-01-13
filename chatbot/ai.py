@@ -3,6 +3,7 @@ import os.path
 import sys
 import json
 import database.company
+import apiai
 
 class ChatBotWebSockets(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -18,13 +19,7 @@ class ChatBotWebSockets(tornado.websocket.WebSocketHandler):
 
 from pprint import pprint
 
-try:
-    import apiai
-except ImportError:
-    sys.path.append(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir)
-    )
-    import apiai
+
 
 CLIENT_ACCESS_TOKEN = '6f9e90c82ed74f66b58be8351a924b11 '
 

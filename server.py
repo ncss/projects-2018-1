@@ -4,14 +4,12 @@ from tornado.ncss import Server, ncssbook_log # ncssbook_log --> Optional | The 
 from database.seeker import *
 from database.position import Position, get_position, return_all_positions
 
-#from chatbot.ai import ChatBotWebSockets
+
 #user = Seeker("James","Curran", "1/1/2012", "000", "james@ncss.com", "Sydney", ["Univeristy of Sydney - Bachelor of Science", "PhD in Computing Linguistics @ Sydeny Univeristy"], ["Coding","Running buisinesses","Reading storiess", "spelling"], ["Python", "everythgin"], ["NCSS"])
 
 def index_handler (request):
     return render(request, 'index.html', {"login": check_logged_in(request)})
 
-#def chat_handler (request):
-#    return render(request, 'chatbot/chat.html', {"login": check_logged_in(request)})
 
 def profile_handler (request, user_id):
     '''
@@ -114,8 +112,18 @@ def pagenotfound_handler(request):
 
 server = Server() # Create a server object
 server.register(r'/', index_handler)
-#server.register(r'/ws/', ChatBotWebSockets)
-#server.register(r'/chat/', chat_handler)
+
+try:
+    from chatbot.ai import ChatBotWebSockets
+    # def chat_handler (request):
+    #     return render(request, 'chatbot/chat.html', {"login": check_logged_in(request)})
+    server.register(r'/ws/', ChatBotWebSockets)
+    # server.register(r'/chat/', chat_handler)
+except ImportError:
+    pass
+
+
+
 server.register(r'/profile/',profilelistpage_handler)
 server.register(r'/searchresult/(.*)/(.+)/', searchresult_handler)
 server.register(r'/position/', positionlist_handler)
