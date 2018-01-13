@@ -10,6 +10,9 @@ class Position(object):
         self.address = address
         self.companyurl = companyurl
         self.blurb = blurb
+    def __str__(self):
+
+        return "positionname: '{}', companyname: '{}', positionlength: '{}', positiontype: '{}', address: '{}', companyurl: '{}', blurb: '{}'".format(self.positionname,self.companyname, self.positionlength, self.positiontype, self.address, self.companyurl, self.blurb)
 
 def create_position(positioninfo):
     positionname, companyname, positionlength, positiontype, address, companyurl, blurb = positioninfo
@@ -36,3 +39,20 @@ def get_position(id):
     id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb = row
     finalposition = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
     return finalposition
+
+def return_all_positions():
+    conn = sqlite3.connect('./seekers_personal.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM position;")
+
+    allpositions = []
+
+    for row in cur:
+        id, positionname, companyname, positionlength, positiontype, address, companyurl, blurb = row
+        position = Position(positionname, companyname, positionlength, positiontype, address, companyurl, blurb)
+        allpositions.append(position)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+    return allpositions
