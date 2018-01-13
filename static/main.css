@@ -127,9 +127,10 @@ nav{
 
 li{
   margin: 10px;
-
 }
-
+.left-two{
+  grid-column: 1 / span 2;
+}
 
 .logins{
   text-align: right;
@@ -188,4 +189,12 @@ li{
 }
 #mapdiv{
   background-image: url("mapimage.jpg");
+}
+/*position information page styling*/
+#positionimage{
+  height: 100%;
+  object-fit: cover;
+}
+#positionblurb{
+  grid-column: 1 / span 3
 }
