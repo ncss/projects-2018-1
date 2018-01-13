@@ -81,6 +81,8 @@ class TemplateTree:
         return tree
 
 
-def render_profiles(template, context):
-    tree = TemplateTree(template).generateTree()
-    return tree.evaluate(context)
+def render_profiles(filename, context):
+    with open(filename) as template:
+        template = template.read()
+        tree = TemplateTree(template).generateTree()
+        return tree.evaluate(context)
