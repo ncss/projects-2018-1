@@ -7,7 +7,7 @@ conn = sqlite3.connect(os.path.join(f, "./seekers_personal.db"))
 cur = conn.cursor()
 
 cur.executescript(open('seekers_personal.sql', 'rU').read())
-cur.executescript(open('experience.sql', 'rU').read())
+cur.executescript(open('reviews.sql', 'rU').read())
 cur.executescript(open('company.sql', 'rU').read())
 cur.executescript(open('position.sql', 'rU').read())
 
