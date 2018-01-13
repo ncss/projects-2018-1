@@ -47,6 +47,3 @@ def suggestComp(formality, size, language):
             temp.append(company)
     temp.sort(key=dist)
     return temp[:2]
-
-
-print([str(c) for c in suggestComp('3','3','Python')])
