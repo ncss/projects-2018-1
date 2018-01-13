@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<head>
-  <link href = '/static/main.css' rel = "stylesheet" type = "text/css">
-</head>
-
-<body>
-  <header>
-    <nav>
-      <h1 class="logo">websitename/logo</h1>
-      <ul>
-        <li><a href=' '>About</a href></li>
-        <li><a href=' '>Profile</a href></li>
-        <li><a href=' '>Search</a href></li>
-        <li><a href=' '>Positions</a href></li>
-      </ul>
-
-      <ul class ="logins">
-        <li>James</li>
-        <li>Logout</li>
-      </ul>
-    </nav>
-  </header>
-  <main>
+{% include header.html %}
+    <h1 id = 'create-account'> Create an Account </h1>
     <article class ="full-width">
   <form method = 'POST' id = "create-profile">
 
@@ -29,7 +8,7 @@
       <input type = 'text' placeholder = 'Username' id = 'textfield_uname' name = 'username'>
 
       <label>Password</label>
-      <input type = 'password' placeholder = 'Passowrd' id = 'textfield_password' name= 'password'>
+      <input type = 'password' placeholder = 'Password' id = 'textfield_password' name= 'password'>
 
       <label>Confirm Password</label>
       <input type = 'password' placeholder = 'Confirm Password' id = 'textfield_password' name= 'passwordconf'>
@@ -41,7 +20,7 @@
       <input type = 'text' placeholder = 'Last Name' id = 'textField_lname' name = 'lname'>
 
       <label>Date of Birth</label>
-      <input type = 'text' placeholder = 'Date of Birth' id = 'textField_birthdate' name = 'birthdate'>
+      <input type = 'datetime' placeholder = 'Date of Birth' id = 'textField_birthdate' name = 'birthdate'>
 
       <label>Phone Number</label>
       <input type = 'text' placeholder = 'Mobile Number' id = 'textField_phone' name = 'phone'>
@@ -53,7 +32,7 @@
       <input type = 'text' placeholder = 'City' id = 'textField_city' name = 'city'>
 
       <label>Bio</label>
-      <input type="text" placeholder= "Bio" id = 'textField_bio' name = 'bio'>
+      <textarea placeholder = 'Bio' id = 'textField_bio' name = 'bio'></textarea>
 
       <!-- for rows and columns, rows = n and cols = n -->
 
@@ -72,9 +51,4 @@
 
   </form>
 </article>
-</main>
-  <footer>
-    <h4>websitename/logo copyright</h4>
-
-  </footer>
-</body>
+{% include footer.html %}
