@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 
 class Experience(object):
     def __init__(self, companyname, experiencetype, rating, person_id):
@@ -45,6 +46,11 @@ class Seeker(object):
         exp = Experience(companyname, experiencetype, rating, self.id)
         exp.save()
         self.experiences.append(exp.id)
+
+    def gravatar(self):
+        h = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon'.format(h)
+
 
 #Find the seeker with specific id and return information
 def get_seeker(db_file, id):
