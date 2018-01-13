@@ -13,13 +13,20 @@
       <a href="/"><img id="logo" src= "/static/logo.png"></a>
       <ul>
         <li><a href="/position/">Search</a></li>
-        <li><a href="/profile/1/">Profile</a></li>
+        <li><a href="/profile/">Profile</a></li>
         <li><a href="/map/">Map</a></li>
       </ul>
 
       <ul class ="logins">
-        <li>James</li>
-        <li>Logout</li>
+        {% if login %}
+        <li>{{login.username}}</li>
+        <li><a href="/logout/">Logout</a></li>
+        {% end if %}
+
+        {% if not login %}
+        <li><a href="/login/">Login</a></li>
+        <li><a href="/signup/">Sign Up</a></li>
+        {% end if %}
       </ul>
     </nav>
   </header>

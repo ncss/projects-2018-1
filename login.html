@@ -1,0 +1,18 @@
+{% include header.html %}
+    <h1 id = 'create-account'> Login </h1>
+    <article class ="full-width">
+      {% if error != "" %}
+      <p>{{error}}</p>
+      {% end if %}
+    <form method = 'POST' id = "create-profile">
+
+        <label>Username</label>
+        <input type = 'text' placeholder = 'Username' id = 'textfield_uname' name = 'username' required >
+
+        <label>Password</label>
+        <input type = 'password' placeholder = 'Password' id = 'textfield_password' name= 'password' required >
+
+        <input type = 'submit' value="Sign In">
+    </form>
+</article>
+{% include footer.html %}
