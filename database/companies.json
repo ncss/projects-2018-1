@@ -1,3 +1,18 @@
-{
-  
-}
+[
+    {
+        "name": "Google",
+        "url": "https://careers.google.com/",
+        "formality": "2",
+        "finance": "0",
+        "difficulty": "7",
+        "size": "10"
+    },
+    {
+        "name": "Atlassian",
+        "url": "https://careers.google.com/",
+        "formality": "4",
+        "finance": "0",
+        "difficulty": "7",
+        "size": "6"
+    }
+]
