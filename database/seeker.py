@@ -88,6 +88,23 @@ def get_experience(id):
     experience = Experience(companyname, experiencetype, rating, person_id)
     return experience
 
+def get_seekers():
+    conn = sqlite3.connect('./seekers_personal.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM seekers_personal;")
+
+    info = []
+    for row in cur:
+
+        id, fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio = row
+        user = Seeker(fname, lname, birth_date, phone, email, city, education, hobbies, skills, username, password, bio, id)
+        info.append(user)
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    return info
 
 #cur.close()
 #conn.close()
