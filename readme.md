@@ -6,3 +6,8 @@ Before running the server, you must create the database:
   3. python setup.py
   4. cd ..
   5. python server.py
+
+
+
+To enable chatbot, additionally run:
+```pip install apiai```
